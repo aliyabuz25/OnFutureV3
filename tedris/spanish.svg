@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="371" height="218" viewBox="0 0 371 218" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="371" height="218" rx="18" fill="url(#gradient-spanish)" />
+  <defs>
+    <linearGradient id="gradient-spanish" x1="0" y1="0" x2="371" y2="218" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#FF7A18" />
+      <stop offset="1" stop-color="#FFDD00" />
+    </linearGradient>
+  </defs>
+  <g fill="#fff">
+    <text x="32" y="110" font-family="Poppins, Arial, sans-serif" font-size="34" font-weight="600">İspan Dili</text>
+    <text x="32" y="140" font-family="Poppins, Arial, sans-serif" font-size="18" font-weight="500">Speaking • Listening</text>
+    <text x="32" y="165" font-family="Poppins, Arial, sans-serif" font-size="14" font-weight="400">Grammar drills for fluency</text>
+  </g>
+  <path d="M240 70c25-20 45 10 20 25-25 15-35-10-20-25z" fill="#fff" opacity="0.3" />
+  <circle cx="310" cy="140" r="15" fill="#fff" opacity="0.35" />
+</svg>

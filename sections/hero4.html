@@ -1,0 +1,544 @@
+<style>
+    #hero {
+        min-height: 1080px !important;
+        background: linear-gradient(180deg, #14132D 0%, #191838 20%, #1E1D43 40%, #28265A 60%, #3D3A86 100%);
+    }
+
+    .hero-contact-title {
+        align-self: stretch;
+        color: #000;
+        font-family: var(--Font-Family-Headline, "DM Sans");
+        font-size: var(--Font-Size-48, 48px);
+        font-style: normal;
+        font-weight: 400;
+        line-height: var(--Line-Height-56, 56px);
+        /* 116.667% */
+    }
+
+    #hero .hero-content {
+        width: 100%;
+        max-width: 1280px;
+        margin: 0 auto;
+    }
+
+    .hero-box {
+        width: min(1280px, 100%);
+        max-width: 1280px;
+        padding: 60px;
+        justify-content: space-between;
+        align-items: flex-start;
+        border-radius: 16px;
+        background: var(--Neutral-Color-50, #FFF);
+        gap: 32px;
+        flex-wrap: wrap;
+        box-sizing: border-box;
+        display: flex;
+    }
+
+    @media (max-width: 768px) {
+        #hero {
+            min-height: 1400px !important;
+        }
+
+        .hero-box {
+            padding: 32px 20px;
+        }
+    }
+
+    .hero-contact-description {
+        align-self: stretch;
+        width: 403px;
+        color: var(--Neutral-Color-600, #525252);
+        font-family: var(--Font-Family-Body, Poppins);
+        font-size: var(--Font-Size-12, 12px);
+        font-style: normal;
+        font-weight: 400;
+        line-height: var(--Line-Height-20, 20px);
+        /* 166.667% */
+        word-wrap: break-word;
+    }
+
+    .hero-contact-label {
+        align-self: stretch;
+        color: var(--Neutral-Color-400, #A3A3A3);
+        font-family: var(--Font-Family-Body, Poppins);
+        font-size: var(--Font-Size-14, 14px);
+        font-style: normal;
+        font-weight: 400;
+        line-height: var(--Line-Height-20, 20px);
+        /* 142.857% */
+    }
+
+    .hero-contact-value {
+        align-self: stretch;
+        color: var(--Neutral-Color-1000, #0A0A0A);
+        font-family: var(--Font-Family-Body, Poppins);
+        font-size: var(--Font-Size-16, 16px);
+        font-style: normal;
+        font-weight: 400;
+        line-height: var(--Line-Height-24, 24px);
+        /* 150% */
+    }
+
+    .hero-form-label {
+        align-self: stretch;
+        color: var(--Neutral-Color-600, #525252);
+        font-family: var(--Font-Family-Body, Poppins);
+        font-size: var(--Font-Size-14, 14px);
+        font-style: normal;
+        font-weight: 400;
+        line-height: var(--Line-Height-20, 20px);
+        /* 142.857% */
+    }
+
+    .hero-contact-left,
+    .hero-contact-right,
+    .hero-contact-form-card,
+    .hero-contact-form,
+    .hero-contact-cols,
+    .hero-contact-field,
+    .hero-contact-phone,
+    .hero-phone-input {
+        box-sizing: border-box;
+    }
+
+    .hero-contact-left {
+        max-width: 544px;
+        display: flex;
+        flex-direction: column;
+        gap: 24px;
+        flex: 1 1 340px;
+    }
+
+    .hero-contact-header {
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+    }
+
+    .hero-contact-list {
+        display: flex;
+        flex-direction: column;
+        gap: 16px;
+    }
+
+    .hero-contact-item {
+        display: flex;
+        gap: 16px;
+        align-items: center;
+    }
+
+    .hero-contact-icon {
+        width: 48px;
+        height: 48px;
+        padding: 10px;
+        background: var(--Neutral-Color-50, #FFF);
+        border-radius: 100px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .hero-contact-text {
+        display: flex;
+        flex-direction: column;
+        gap: 4px;
+    }
+
+    .hero-contact-form-card {
+        flex: 1 1 320px;
+        max-width: 616px;
+        padding: 24px;
+        background: var(--Neutral-Color-100, #F7F6F6);
+        box-shadow: 0px 8px 8px -12px rgba(166, 166, 166, 0.03);
+        border-radius: 24px;
+        outline: 1px solid var(--Neutral-Color-200, #DDD);
+        outline-offset: -1px;
+        display: flex;
+        flex-direction: column;
+        gap: 24px;
+    }
+
+    .hero-contact-form {
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        gap: 24px;
+    }
+
+    .hero-contact-cols {
+        display: flex;
+        gap: 16px;
+        flex-wrap: wrap;
+    }
+
+    .hero-contact-field {
+        flex: 1 1 240px;
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+    }
+
+    .hero-contact-field input,
+    .hero-contact-subject textarea,
+    .hero-phone-input input {
+        width: 100%;
+        border-radius: 100px;
+        border: 1px solid var(--Neutral-Color-200, #DDDDDD);
+        padding: 16px 20px;
+        background: var(--Neutral-Color-50, #FFF);
+        font-family: Poppins, sans-serif;
+        font-size: 16px;
+        color: var(--Neutral-Color-500, #737373);
+        line-height: 24px;
+        box-sizing: border-box;
+    }
+
+    .hero-phone-input input {
+        border: none;
+        padding-left: 0;
+    }
+
+    .hero-contact-subject textarea {
+        border-radius: 16px;
+        min-height: 120px;
+        resize: vertical;
+    }
+
+    .hero-contact-subject {
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+    }
+
+    .hero-contact-hint {
+        align-self: flex-end;
+        font-family: Poppins, sans-serif;
+        font-size: 12px;
+        color: var(--Neutral-Color-700, #404040);
+    }
+
+    .hero-phone-input {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        background: var(--Neutral-Color-50, #FFF);
+        border-radius: 100px;
+        outline: 1px solid var(--Neutral-Color-200, #DDD);
+        outline-offset: -1px;
+        padding-right: 12px;
+    }
+
+    .hero-phone-prefix {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        padding: 8px 16px 8px 20px;
+        border-right: 1px solid var(--Neutral-Color-300, #C8C8C8);
+    }
+
+    .hero-phone-flag {
+        display: flex;
+        align-items: center;
+        gap: 4px;
+        color: var(--Neutral-Color-500, #737373);
+        font-size: 16px;
+        font-family: Poppins;
+        font-weight: 400;
+        line-height: 24px;
+    }
+
+    .hero-contact-submit {
+        background: var(--Primary-Color-Main, #6560E0);
+        border-radius: 100px;
+        border: none;
+        color: var(--Neutral-Color-50, #FFFFFF);
+        font-family: Poppins, sans-serif;
+        font-size: 14px;
+        line-height: 20px;
+        padding: 12px 16px;
+        cursor: pointer;
+        width: 100%;
+    }
+
+    .hero-box {
+        width: min(1280px, 100%);
+        max-width: 1280px;
+        padding: 60px;
+        justify-content: space-between;
+        align-items: flex-start;
+        border-radius: 16px;
+        background: var(--Neutral-Color-50, #FFF);
+        gap: 32px;
+        flex-wrap: wrap;
+        box-sizing: border-box;
+        display: flex;
+    }
+
+    .scholarship-grid-inline {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 24px;
+        width: 100%;
+        box-sizing: border-box;
+    }
+
+    .scholarship-card {
+        background: #fff;
+        border-radius: 20px;
+        padding: 24px;
+        box-shadow: 0 10px 25px rgba(0, 0, 0, .05);
+        border: 1px solid #f1f5f9;
+        display: flex;
+        flex-direction: column;
+        gap: 16px;
+        width: 100%;
+        box-sizing: border-box;
+    }
+
+    .scholarship-card h3 {
+        font-size: 20px;
+        font-weight: 600;
+        margin: 0;
+    }
+
+    .scholarship-card p {
+        font-size: 14px;
+        color: #6b7280;
+        line-height: 1.6;
+        margin: 0 0 8px;
+    }
+
+    .scholarship-card .scholarship-meta {
+        border-top: 1px solid #e5e7eb;
+        padding-top: 16px;
+        margin: 0;
+        font-weight: 600;
+    }
+
+    .scholarship-card ul {
+        list-style: none;
+        padding: 0;
+        margin: 0 0 16px;
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .scholarship-card li {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        font-size: 14px;
+        color: #111827;
+    }
+
+    .scholarship-card li span {
+        width: 20px;
+        height: 20px;
+        border-radius: 50%;
+        background: #4f46e5;
+        color: #fff;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 12px;
+        flex-shrink: 0;
+    }
+
+    .scholarship-button {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        padding: 10px 14px;
+        border-radius: 12px;
+        background: #4f46e5;
+        color: #fff;
+        text-decoration: none;
+        font-weight: 600;
+        font-size: 14px;
+        width: fit-content;
+    }
+
+    @media (max-width: 992px) {
+        .scholarship-grid-inline {
+            grid-template-columns: 1fr !important;
+            gap: 16px;
+        }
+
+        .scholarship-card {
+            padding: 20px !important;
+        }
+    }
+
+    @media (max-width: 992px) {
+        .hero-box {
+            padding: 32px 20px;
+            flex-direction: column;
+            align-items: stretch;
+            gap: 28px;
+        }
+
+        .hero-contact-description {
+            width: 100%;
+        }
+
+        .hero-contact-cols {
+            gap: 12px;
+        }
+
+        .hero-contact-field {
+            flex: 1 1 100%;
+        }
+
+        .hero-contact-form-card {
+            padding: 20px;
+        }
+
+        .hero-contact-submit {
+            width: 100%;
+        }
+    }
+</style>
+<div style="height: 880px !important;" id="hero" class="">
+
+
+    <nav class="navbar navbar-expand-lg navbar-dark hero-nav">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="#">
+                <img src="/logo/onfuture-logo.png" alt="Logo" class="logo-img">
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNav"
+                aria-controls="mainNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="mainNav">
+                <ul class="navbar-nav mx-auto mb-2 mb-lg-0">
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="/index.html" data-i18n-key="nav.home">Ana
+                            səhifə</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/pages/Təhsil.html" data-i18n-key="nav.education">Xaricdə Təhsil</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/pages/Akademiya.html" data-i18n-key="nav.academy">Akademiya</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/pages/Eleqa.html" data-i18n-key="nav.contact">Əlaqə</a>
+                    </li>
+                </ul>
+                <div class="hero-nav-actions d-flex align-items-center gap-3 ms-auto">
+                    <button class="btn btn-link text-decoration-none text-white p-0 search-button" type="button"
+                        aria-label="Axtar">
+                        <img src="/elements/Frame.svg" alt="Search icon" width="20" height="20">
+                    </button>
+                    <div class="dropdown">
+                        <button class="btn btn-outline-light dropdown-toggle" type="button" data-bs-toggle="dropdown"
+                            aria-expanded="false">
+                            <img src="/flags/Flags.svg" alt="Language flag" class="language-flag">
+                            <span class="language-label">AZE</span>
+                            <img src="/elements/arrow-down.svg" alt="Arrow down" class="dropdown-arrow-icon">
+                        </button>
+                        <ul class="dropdown-menu">
+                            <li>
+                                <button type="button" class="dropdown-item" aria-current="true" data-lang="AZE"
+                                    data-flag="/flags/Flags.svg" data-rect-flag="/flags/Flags.svg">
+                                    <img src="/flags/Flags.svg" alt="Azerbaijan flag" class="dropdown-flag-icon">
+                                    <span>AZE</span>
+                                    <img src="/selected-ar/Frame.svg" alt="" class="dropdown-selected-indicator">
+                                </button>
+                            </li>
+                            <li>
+                                <button type="button" class="dropdown-item" data-lang="USA" data-flag="/tedris/usa.png"
+                                    data-rect-flag="/tedris/usa.png">
+                                    <img src="/tedris/usa.png" alt="USA flag" class="dropdown-flag-icon">
+                                    <span>USA</span>
+                                    <img src="/selected-ar/Frame.svg" alt="" class="dropdown-selected-indicator">
+                                </button>
+                            </li>
+                        </ul>
+                    </div>
+                    <button class="cta-button" type="button">
+                        <span data-i18n-key="nav.cta">Müraciət et</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </nav>
+    <div class="hero-content">
+        <div class="hero-box">
+            <div class="hero-contact-left">
+                <div class="hero-contact-header">
+                    <div class="hero-contact-title">Bizimlə Əlaqə</div>
+                    <div class="hero-contact-description">OnFuture, xaricdə təhsil almağınız və mütəxəssis təlimçilər
+                        tərəfindən hazırlanmış kurslarla texniki bacarıqlarınızı inkişaf etdirməyiniz üçün sizə dəstək
+                        olur.</div>
+                </div>
+                <div class="hero-contact-list">
+                    <div class="hero-contact-item">
+                        <div class="hero-contact-icon">
+                            <img src="/elements/call.svg" alt="Call icon" width="24" height="24">
+                        </div>
+                        <div class="hero-contact-text">
+                            <div class="hero-contact-label">Telefon nömrəsi:</div>
+                            <div class="hero-contact-value">+994 70 434 74 24</div>
+                        </div>
+                    </div>
+                    <div class="hero-contact-item">
+                        <div class="hero-contact-icon">
+                            <img src="/elements/message-text.svg" alt="Message icon" width="24" height="24">
+                        </div>
+                        <div class="hero-contact-text">
+                            <div class="hero-contact-label">Email ünvanı:</div>
+                            <div class="hero-contact-value">onfuture.az@gmail.com</div>
+                        </div>
+                    </div>
+                    <div class="hero-contact-item">
+                        <div class="hero-contact-icon">
+                            <img src="/elements/location.svg" alt="Location icon" width="24" height="24">
+                        </div>
+                        <div class="hero-contact-text">
+                            <div class="hero-contact-label">Ünvan</div>
+                            <div class="hero-contact-value">Sharifzada 75a , Baku Azerbaijan</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="hero-contact-form-card">
+                <form class="hero-contact-form">
+                    <div class="hero-contact-cols">
+                        <label class="hero-contact-field">
+                            <span class="hero-form-label">Ad</span>
+                            <input type="text" name="firstName" placeholder="Name">
+                        </label>
+                        <label class="hero-contact-field">
+                            <span class="hero-form-label">Soyad</span>
+                            <input type="text" name="lastName" placeholder="Soyad">
+                        </label>
+                    </div>
+                    <div class="hero-contact-phone">
+                        <div class="hero-contact-label">Telefon Nömrəsi</div>
+                        <div class="hero-phone-input">
+                            <div class="hero-phone-prefix">
+                                <div class="hero-phone-flag">
+                                    <img src="/flags/Flags.svg" alt="Azerbaijan flag" width="24" height="24">
+                                    <div>+994</div>
+                                </div>
+                                <img src="/elements/lsicon_down-outline.svg" alt="Down arrow" width="24" height="24">
+                            </div>
+                            <div class="hero-phone-field">
+                                <input type="tel" name="phone" placeholder="55-898-09-09">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="hero-contact-subject">
+                        <label class="hero-form-label">Mövzu</label>
+                        <textarea name="subject" placeholder="Ərizə Formu" rows="3"></textarea>
+                        <div class="hero-contact-hint">Max 100 words</div>
+                    </div>
+                    <button type="submit" class="hero-contact-submit">Müraciət et</button>
+                </form>
+            </div>
+        </div>
+    </div>

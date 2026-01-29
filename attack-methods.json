@@ -1,0 +1,12 @@
+[
+  { "name": "script_tag", "payload": "<script>alert(1)</script>" },
+  { "name": "img_onerror", "payload": "<img src=x onerror=alert(1)>" },
+  { "name": "svg_onload", "payload": "<svg onload=alert(1)>" },
+  { "name": "body_onload", "payload": "<body onload=alert(1)>" },
+  { "name": "js_uri", "payload": "javascript:alert(1)" },
+  { "name": "svg_script", "payload": "<svg><script>alert(1)</script></svg>" },
+  { "name": "iframe_js", "payload": "<iframe src='javascript:alert(1)'></iframe>" },
+  { "name": "input_onfocus", "payload": "<input autofocus onfocus=alert(1)>" },
+  { "name": "img_js_src", "payload": "<img src='javascript:alert(1)'>" },
+  { "name": "div_onmouseover", "payload": "<div onmouseover=alert(1)>x</div>" }
+]

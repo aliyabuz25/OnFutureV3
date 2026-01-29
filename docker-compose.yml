@@ -1,0 +1,22 @@
+services:
+  onfuture-web:
+    build: .
+    image: onfuture-web:latest
+    restart: unless-stopped
+    environment:
+      PORT: "6985"
+      HOST: "0.0.0.0"
+    volumes:
+      - /datastore/onfuture-web/logs.json:/app/logs.json
+    networks:
+      - edge
+    labels:
+      - 'traefik.enable=true'
+      - 'traefik.docker.network=edge'
+      - 'traefik.http.routers.onfuture-web.rule=Host(`onfuture.az`) || Host(`www.onfuture.az`)'
+      - 'traefik.http.routers.onfuture-web.entrypoints=web'
+      - 'traefik.http.services.onfuture-web.loadbalancer.server.port=6985'
+
+networks:
+  edge:
+    external: true

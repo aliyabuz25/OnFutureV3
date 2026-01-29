@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Testimonials</title>
+
+<style>
+/* =======================
+   DESIGN TOKENS
+======================= */
+:root {
+  --Neutral-Color-1100: #000000;
+  --Neutral-Color-600: #525252;
+  --Neutral-Color-400: #A3A3A3;
+
+  --Font-Family-Body: Poppins, system-ui, -apple-system,
+    BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
+
+  --Font-Size-14: 14px;
+  --Font-Size-16: 16px;
+  --Font-Size-20: 20px;
+
+  --Line-Height-20: 20px;
+  --Line-Height-24: 24px;
+  --Line-Height-32: 32px;
+}
+
+/* =======================
+   RESET
+======================= */
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  background: #fff;
+  font-family: var(--Font-Family-Body);
+}
+
+/* =======================
+   SECTION
+======================= */
+.section {
+  width: 100%;
+  max-width: none;
+  margin: 0 auto;
+  padding: 60px 40px;
+  overflow: hidden;
+}
+
+/* =======================
+   HEADER
+======================= */
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.header h2 {
+  width: 596px;
+  max-width: 100%;
+  margin: 0;
+  color: var(--Neutral-Color-1100, #000);
+  font-family: var(--Font-Family-Headline, "DM Sans");
+  font-size: var(--Font-Size-48, 48px);
+  font-style: normal;
+  font-weight: 500;
+  line-height: var(--Line-Height-56, 56px);
+}
+
+.nav {
+  display: flex;
+  gap: 12px;
+}
+
+.nav button {
+  display: flex;
+  width: 60px;
+  height: 60px;
+  padding: 8px;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  aspect-ratio: 1 / 1;
+  border-radius: 100px;
+  border: 1px solid var(--Neutral-Color-1000, #0A0A0A);
+  background: #fff;
+  cursor: pointer;
+}
+
+/* =======================
+   VIEWPORT
+======================= */
+.viewport {
+  margin-top: 48px;
+  padding-top: 24px;
+  overflow: visible;
+}
+
+/* =======================
+   TRACK
+======================= */
+.track {
+  display: flex;
+  gap: 24px;
+  transition: transform 0.6s cubic-bezier(.22,.61,.36,1);
+  will-change: transform;
+}
+
+/* =======================
+   SLOT
+======================= */
+.slot {
+  width: min(720px, 100%);
+  flex-shrink: 0;
+}
+
+/* =======================
+   CARD
+======================= */
+.card {
+  display: flex;
+  width: 100%;
+  padding: 16px;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 12px;
+  flex-shrink: 0;
+
+  border-radius: 12px;
+  background: #FFF;
+  box-shadow: 0 0 8px rgba(0,0,0,0.12);
+
+  transition: transform .4s ease, opacity .4s ease;
+}
+
+.card.inactive {
+  opacity: 0.4;
+  transform: scale(0.95);
+}
+
+/* =======================
+   CARD HEADER
+======================= */
+.card-header {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.user {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+}
+
+/* =======================
+   AVATAR (CORPORATE)
+======================= */
+.avatar {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  overflow: hidden;
+  background: #f5f5f5;
+  border: 1px solid #e5e5e5;
+  flex-shrink: 0;
+}
+.avatar img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+/* =======================
+   TYPOGRAPHY
+======================= */
+.name {
+  color: var(--Neutral-Color-1100);
+  font-size: var(--Font-Size-20);
+  font-weight: 500;
+  line-height: var(--Line-Height-32);
+}
+
+.country {
+  color: var(--Neutral-Color-400);
+  font-size: var(--Font-Size-16);
+  font-weight: 400;
+  line-height: var(--Line-Height-24);
+}
+
+.rating {
+  display: flex;
+  gap: 6px;
+  align-items: center;
+  color: var(--Neutral-Color-1100, #000);
+  font-family: var(--Font-Family-Body, Poppins);
+  font-size: var(--Font-Size-14, 14px);
+  font-style: normal;
+  font-weight: 400;
+  line-height: var(--Line-Height-20, 20px);
+}
+
+.star { color: #f5b301; }
+.rating img.star {
+  display: inline-block;
+  vertical-align: middle;
+}
+
+.text {
+  color: var(--Neutral-Color-600);
+  font-size: var(--Font-Size-20);
+  font-weight: 400;
+  line-height: var(--Line-Height-32);
+  align-self: stretch;
+}
+</style>
+</head>
+
+<body>
+
+<section class="section">
+
+  <div class="header">
+    <h2>Testimonials</h2>
+    <div class="nav">
+      <button id="prev" aria-label="Previous">
+        <img src="sections/arrow-left.svg" alt="" width="24" height="24">
+      </button>
+      <button id="next" aria-label="Next">
+        <img src="sections/arrow-right.svg" alt="" width="24" height="24">
+      </button>
+    </div>
+  </div>
+
+  <div class="viewport">
+    <div class="track" id="track">
+      <div class="slot"><div class="card inactive"></div></div>
+      <div class="slot"><div class="card"></div></div>
+      <div class="slot"><div class="card inactive"></div></div>
+      <div class="slot"><div class="card inactive"></div></div>
+    </div>
+  </div>
+
+</section>
+
+<script>
+const cards = document.querySelectorAll(".card");
+let index = 1;
+
+const testimonialData = [
+  {
+    name: "Rachel Green",
+    country: "Azerbaijan",
+    rating: "5.0",
+    text:
+      "The courses were excellent, but be ready—it moves quickly. I joined the back-end specialization and learned SQL, MongoDB, and authentication methods I hadn’t even heard of.",
+    avatar: "workers/Ellipse 6.svg",
+  },
+  {
+    name: "Zahra Mammadova",
+    country: "Azerbaijan",
+    rating: "4.8",
+    text:
+      "Mentors were supportive and the projects felt close to real-world tasks. The career guidance sessions helped me polish my portfolio and interviews.",
+    avatar: "workers/Ellipse 6-2.svg",
+  },
+  {
+    name: "Elvin Rahimov",
+    country: "Azerbaijan",
+    rating: "4.9",
+    text:
+      "I switched from non-tech to front-end and the pace was perfect. Clear modules, code reviews, and a strong community made it smooth.",
+    avatar: "workers/Ellipse 6-3.svg",
+  },
+  {
+    name: "Leyla Sadigova",
+    country: "Azerbaijan",
+    rating: "5.0",
+    text:
+      "The DevOps bootcamp pushed me out of my comfort zone—in the best way. CI/CD, cloud, and monitoring labs were exactly what I needed for work.",
+    avatar: "workers/Ellipse 6.svg",
+  },
+];
+
+cards.forEach((card, i) => {
+  const item = testimonialData[i % testimonialData.length];
+  card.innerHTML = `
+    <div class="card-header">
+      <div class="user">
+        <div class="avatar"><img src="${item.avatar}" alt="${item.name}"></div>
+        <div>
+          <div class="name">${item.name}</div>
+          <div class="country">${item.country}</div>
+        </div>
+      </div>
+      <div class="rating"><img src="sections/star.svg" alt="" class="star" width="16" height="16">${item.rating}</div>
+    </div>
+
+    <p class="text">${item.text}</p>
+  `;
+});
+
+const track = document.getElementById("track");
+const viewport = document.querySelector(".viewport");
+
+function update() {
+  const computedGap = parseFloat(getComputedStyle(track).columnGap || getComputedStyle(track).gap || "24") || 24;
+  const cardWidth = cards[0]?.getBoundingClientRect().width || 0;
+  const containerWidth = viewport?.clientWidth || cardWidth;
+
+  cards.forEach((c, idx) => {
+    c.classList.toggle("inactive", idx !== index);
+  });
+
+  const offset =
+    -(index * (cardWidth + computedGap)) +
+    (containerWidth - cardWidth) / 2;
+
+  track.style.transform = `translateX(${offset}px)`;
+}
+
+document.getElementById("next").onclick = () => {
+  if (index < cards.length - 1) { index++; update(); }
+};
+
+document.getElementById("prev").onclick = () => {
+  if (index > 0) { index--; update(); }
+};
+
+update();
+</script>
+
+</body>
+</html>

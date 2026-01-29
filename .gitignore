@@ -1,0 +1,8 @@
+node_modules
+logs.json
+.DS_Store
+__MACOSX
+.git
+.idea
+.vscode
+*.log

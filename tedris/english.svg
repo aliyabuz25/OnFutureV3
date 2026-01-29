@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="371" height="218" viewBox="0 0 371 218" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="371" height="218" rx="18" fill="url(#gradient-eng)" />
+  <defs>
+    <linearGradient id="gradient-eng" x1="0" y1="0" x2="371" y2="218" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#00C9A7" />
+      <stop offset="1" stop-color="#6BFFB8" />
+    </linearGradient>
+  </defs>
+  <g fill="#fff">
+    <text x="32" y="120" font-family="Poppins, Arial, sans-serif" font-size="34" font-weight="600">İngilis Dili</text>
+    <text x="32" y="150" font-family="Poppins, Arial, sans-serif" font-size="18" font-weight="500">Everyday and academic use</text>
+    <text x="32" y="170" font-family="Poppins, Arial, sans-serif" font-size="14" font-weight="400">Practice sets for travel &amp; work</text>
+  </g>
+  <path d="M240 60h80v90h-80z" fill="rgba(255,255,255,0.25)" />
+  <circle cx="300" cy="150" r="22" fill="rgba(255,255,255,0.35)" />
+</svg>

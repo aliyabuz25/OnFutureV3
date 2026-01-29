@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="371" height="218" viewBox="0 0 371 218" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="371" height="218" rx="18" fill="url(#gradient-ielts)" />
+  <defs>
+    <linearGradient id="gradient-ielts" x1="0" y1="0" x2="371" y2="218" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#6A70FD" />
+      <stop offset="1" stop-color="#B6D4FF" />
+    </linearGradient>
+  </defs>
+  <g fill="#fff">
+    <text x="32" y="120" font-family="DM Sans, Arial, sans-serif" font-size="36" font-weight="700">IELTS</text>
+    <text x="32" y="150" font-family="DM Sans, Arial, sans-serif" font-size="16" font-weight="500">Reading • Writing • Listening</text>
+    <text x="32" y="170" font-family="DM Sans, Arial, sans-serif" font-size="14" font-weight="400">Exam-ready strategies</text>
+  </g>
+  <rect x="230" y="60" width="90" height="60" rx="10" fill="rgba(255,255,255,0.15)" />
+  <circle cx="260" cy="150" r="20" fill="rgba(255,255,255,0.25)" />
+</svg>
