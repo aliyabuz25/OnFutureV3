@@ -17,6 +17,7 @@ const SECTION_TARGETS = [
 ];
 
 document.addEventListener("DOMContentLoaded", () => {
+  console.log("Versiyon: 1.7.0");
   loadSections()
     .then(initPage)
     .catch((error) => console.error("Section load failed", error));
@@ -34,14 +35,13 @@ async function loadSections() {
 
 function initPage() {
   const dropdown = document.querySelector(".dropdown");
-  if (!dropdown) return;
   const navLinks = document.querySelectorAll(".nav-link");
-  const toggle = dropdown.querySelector('[data-bs-toggle="dropdown"]');
-  const menu = dropdown.querySelector(".dropdown-menu");
+  const toggle = dropdown?.querySelector('[data-bs-toggle="dropdown"]');
+  const menu = dropdown?.querySelector(".dropdown-menu");
   const arrowIcon = toggle?.querySelector(".dropdown-arrow-icon");
-  const languageLabel = dropdown.querySelector(".language-label");
-  const languageFlag = dropdown.querySelector(".language-flag");
-  const languageButtons = dropdown.querySelectorAll(".dropdown-item");
+  const languageLabel = dropdown?.querySelector(".language-label");
+  const languageFlag = dropdown?.querySelector(".language-flag");
+  const languageButtons = dropdown?.querySelectorAll(".dropdown-item") || [];
   const hero = document.getElementById("hero");
   const globe = document.querySelector(".globe-wrap");
   const ellipse = document.querySelector(".ellipse");
@@ -55,11 +55,7 @@ function initPage() {
   const techProgramsGrid = document.querySelector('.tech-grid[data-tab="tech"]');
   const faqItems = document.querySelectorAll(".faq-item");
 
-  const LANGUAGE_MAP = {
-    AZE: "az",
-    USA: "en",
-  };
-  const DEFAULT_LANGUAGE = "AZE";
+  const DEFAULT_LANGUAGE = "az";
   const getI18nNodes = () => document.querySelectorAll("[data-i18n-key]");
   const translationCache = {};
 
@@ -237,11 +233,6 @@ function initPage() {
     });
   };
 
-  const updateLanguageByAttr = (langAttr) => {
-    const normalizedLang = LANGUAGE_MAP[langAttr] || LANGUAGE_MAP[DEFAULT_LANGUAGE];
-    setLanguage(normalizedLang);
-  };
-
   const alignEllipses = () => {
     if (window.innerWidth < 992) return;
     if (!hero || !globe || !ellipse) return;
@@ -261,7 +252,7 @@ function initPage() {
   };
 
   const closeMenu = () => {
-    dropdown.classList.remove("show");
+    dropdown?.classList.remove("show");
     menu?.classList.remove("show");
     toggle?.setAttribute("aria-expanded", "false");
     if (arrowIcon) {
@@ -271,7 +262,7 @@ function initPage() {
 
   const toggleMenu = (event) => {
     event.stopPropagation();
-    const isOpen = dropdown.classList.toggle("show");
+    const isOpen = dropdown?.classList.toggle("show") || false;
     if (menu) {
       menu.classList.toggle("show", isOpen);
     }
@@ -281,43 +272,7 @@ function initPage() {
     }
   };
 
-  const handleSelection = (button) => {
-    const lang = button.dataset.lang;
-    const flag = button.dataset.flag;
-    if (lang && languageLabel) {
-      languageLabel.textContent = lang;
-    }
-    if (flag && languageFlag) {
-      languageFlag.src = flag;
-    }
-    languageButtons.forEach((btn) => {
-      if (btn === button) {
-        btn.setAttribute("aria-current", "true");
-      } else {
-        btn.removeAttribute("aria-current");
-      }
-    });
-    closeMenu();
-    updateLanguageByAttr(lang);
-  };
 
-  const fadeFlagImage = (img, targetSrc) => {
-    if (!img || !targetSrc) return;
-    if (img.dataset.fadeTimeout) {
-      clearTimeout(Number(img.dataset.fadeTimeout));
-    }
-    const currentSrc = img.dataset.currentSrc || img.src;
-    if (currentSrc === targetSrc) return;
-    img.style.transition = "opacity 0.1s ease";
-    img.style.opacity = "0";
-    const timeoutId = window.setTimeout(() => {
-      img.src = targetSrc;
-      img.style.opacity = "1";
-      img.dataset.currentSrc = targetSrc;
-      delete img.dataset.fadeTimeout;
-    }, 100);
-    img.dataset.fadeTimeout = timeoutId.toString();
-  };
 
   let activeIncoming = null;
   let activeOutgoing = null;
@@ -555,19 +510,8 @@ function initPage() {
     });
   };
 
-  languageButtons.forEach((btn) => {
-    const flagImg = btn.querySelector(".dropdown-flag-icon");
-    const baseFlag = btn.dataset.flag;
-    const rectFlag = btn.dataset.rectFlag;
-    if (flagImg) {
-      flagImg.dataset.currentSrc = flagImg.src;
-      btn.addEventListener("mouseenter", () => fadeFlagImage(flagImg, rectFlag || baseFlag));
-      btn.addEventListener("mouseleave", () => fadeFlagImage(flagImg, baseFlag));
-    }
-    btn.addEventListener("click", () => handleSelection(btn));
-  });
 
-  updateLanguageByAttr(DEFAULT_LANGUAGE);
+  setLanguage(DEFAULT_LANGUAGE);
   alignEllipses();
   window.addEventListener("resize", alignEllipses);
   enableHeroElementSwap();

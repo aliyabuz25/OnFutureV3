@@ -1,52 +1,54 @@
 <style>
-#hero {
-    height: 540px !important;
-    background: linear-gradient(180deg, #14132D 0%, #191838 20%, #1E1D43 40%, #28265A 60%, #3D3A86 100%);
+    #hero {
+        height: 540px !important;
+        background: linear-gradient(180deg, #14132D 0%, #191838 20%, #1E1D43 40%, #28265A 60%, #3D3A86 100%);
 
-}
-#hero .hero-content {
-    top: clamp(110px, 14vw, 150px);
-    gap: 12px;
-    width: min(1180px, 100%);
-    margin-inline: auto;
-    text-align: center;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    padding-inline: 24px;
-}
-#hero .hero-heading {
-    font-family: var(--Font-Family-Headline, "DM Sans");
-    font-size: 64px;
-    font-weight: 400 !important;
-    line-height: 76px;
-    max-width: 964px;
-    width: 100%;
-    margin: 0 auto;
-    text-align: center;
-    white-space: normal;
-    overflow: visible;
-}
-
-#hero .hero-subtitle {
-    color: var(--Neutral-Color-100, #F2F2F2);
-    font-size: 18px;
-    line-height: 24px;
-    max-width: 640px;
-    width: 100%;
-    margin: 0 auto;
-}
-
-@media (max-width: 1200px) {
-    #hero .hero-heading {
-        font-size: clamp(46px, 7vw, 64px);
-        line-height: clamp(54px, 8vw, 76px);
     }
-}
+
+    #hero .hero-content {
+        top: clamp(110px, 14vw, 150px);
+        gap: 12px;
+        width: min(1180px, 100%);
+        margin-inline: auto;
+        text-align: center;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding-inline: 24px;
+    }
+
+    #hero .hero-heading {
+        font-family: var(--Font-Family-Headline, "DM Sans");
+        font-size: 64px;
+        font-weight: 400 !important;
+        line-height: 76px;
+        max-width: 964px;
+        width: 100%;
+        margin: 0 auto;
+        text-align: center;
+        white-space: normal;
+        overflow: visible;
+    }
+
+    #hero .hero-subtitle {
+        color: var(--Neutral-Color-100, #F2F2F2);
+        font-size: 18px;
+        line-height: 24px;
+        max-width: 640px;
+        width: 100%;
+        margin: 0 auto;
+    }
+
+    @media (max-width: 1200px) {
+        #hero .hero-heading {
+            font-size: clamp(46px, 7vw, 64px);
+            line-height: clamp(54px, 8vw, 76px);
+        }
+    }
 </style>
-<div style="height: 540px !important;"  id="hero" class="">
-   
-    
+<div style="height: 540px !important;" id="hero" class="">
+
+
     <nav class="navbar navbar-expand-lg navbar-dark hero-nav">
         <div class="container-fluid">
             <a class="navbar-brand" href="#">
@@ -59,7 +61,8 @@
             <div class="collapse navbar-collapse" id="mainNav">
                 <ul class="navbar-nav mx-auto mb-2 mb-lg-0">
                     <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="/index.html" data-i18n-key="nav.home">Ana səhifə</a>
+                        <a class="nav-link active" aria-current="page" href="/index.html" data-i18n-key="nav.home">Ana
+                            səhifə</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="/pages/Təhsil.html" data-i18n-key="nav.education">Xaricdə Təhsil</a>
@@ -72,33 +75,11 @@
                     </li>
                 </ul>
                 <div class="hero-nav-actions d-flex align-items-center gap-3 ms-auto">
-                    <button class="btn btn-link text-decoration-none text-white p-0 search-button" type="button" aria-label="Axtar">
+                    <button class="btn btn-link text-decoration-none text-white p-0 search-button" type="button"
+                        aria-label="Axtar">
                         <img src="/elements/Frame.svg" alt="Search icon" width="20" height="20">
                     </button>
-                    <div class="dropdown">
-                        <button class="btn btn-outline-light dropdown-toggle" type="button" data-bs-toggle="dropdown"
-                            aria-expanded="false">
-                            <img src="/flags/Flags.svg" alt="Language flag" class="language-flag">
-                            <span class="language-label">AZE</span>
-                            <img src="/elements/arrow-down.svg" alt="Arrow down" class="dropdown-arrow-icon">
-                        </button>
-                        <ul class="dropdown-menu">
-                            <li>
-                                <button type="button" class="dropdown-item" aria-current="true" data-lang="AZE" data-flag="/flags/Flags.svg" data-rect-flag="/flags/Flags.svg">
-                                    <img src="/flags/Flags.svg" alt="Azerbaijan flag" class="dropdown-flag-icon">
-                                    <span>AZE</span>
-                                    <img src="/selected-ar/Frame.svg" alt="" class="dropdown-selected-indicator">
-                                </button>
-                            </li>
-                            <li>
-                                <button type="button" class="dropdown-item" data-lang="USA" data-flag="/tedris/usa.png" data-rect-flag="/tedris/usa.png">
-                                    <img src="/tedris/usa.png" alt="USA flag" class="dropdown-flag-icon">
-                                    <span>USA</span>
-                                    <img src="/selected-ar/Frame.svg" alt="" class="dropdown-selected-indicator">
-                                </button>
-                            </li>
-                        </ul>
-                    </div>
+
                     <button class="cta-button" type="button">
                         <span data-i18n-key="nav.cta">Müraciət et</span>
                     </button>
@@ -107,8 +88,10 @@
         </div>
     </nav>
     <div class="hero-content">
-        <p class="hero-heading" data-i18n-key="hero.heading">Peşəkar İnkişaf üçün İnnovativ Tədris və Xarici Dil Proqramları</p>
-        <p class="hero-subtitle" style="color:#DDDDDD;" data-i18n-key="hero.subtitle">Peşəkar inkişafınızı dəstəkləyən beynəlxalq səviyyəli kurslar və dil hazırlığı</p>
+        <p class="hero-heading" data-i18n-key="hero.heading">Peşəkar İnkişaf üçün İnnovativ Tədris və Xarici Dil
+            Proqramları</p>
+        <p class="hero-subtitle" style="color:#DDDDDD;" data-i18n-key="hero.subtitle">Peşəkar inkişafınızı dəstəkləyən
+            beynəlxalq səviyyəli kurslar və dil hazırlığı</p>
         <div class="hero-actions">
             <button class="hero-cta" type="button">
                 <span class="hero-cta-text" data-i18n-key="hero.cta">Müraciət et</span>
