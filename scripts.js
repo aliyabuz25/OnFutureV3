@@ -55,7 +55,13 @@ function initPage() {
   const techProgramsGrid = document.querySelector('.tech-grid[data-tab="tech"]');
   const faqItems = document.querySelectorAll(".faq-item");
 
-
+  const LANGUAGE_MAP = {
+    AZE: "az",
+    USA: "en",
+  };
+  const DEFAULT_LANGUAGE = "AZE";
+  const getI18nNodes = () => document.querySelectorAll("[data-i18n-key]");
+  const translationCache = {};
 
   const formatStudyDescriptions = () => {
     document.querySelectorAll(".study-card-desc").forEach((desc) => {
@@ -88,7 +94,8 @@ function initPage() {
     title,
     img,
     desc,
-    lessoncoynt
+    lessoncoynt,
+    { badgeKey, titleKey, descKey, lessonsKey = "tech.lessonCount", applyKey = "tech.apply" } = {}
   ) => {
     const card = document.createElement("div");
     card.className = "tech-card";
@@ -96,10 +103,12 @@ function initPage() {
     const chip = document.createElement("div");
     chip.className = "tech-chip";
     chip.textContent = badgetext;
+    if (badgeKey) chip.dataset.i18nKey = badgeKey;
 
 
     const heading = document.createElement("h3");
     heading.textContent = title;
+    if (titleKey) heading.dataset.i18nKey = titleKey;
 
 
     const media = document.createElement("div");
@@ -112,6 +121,7 @@ function initPage() {
     const description = document.createElement("p");
     description.className = "tech-desc";
     description.textContent = desc;
+    if (descKey) description.dataset.i18nKey = descKey;
 
 
     const footer = document.createElement("div");
@@ -126,6 +136,7 @@ function initPage() {
     icon.height = 20;
     const lessonSpan = document.createElement("span");
     lessonSpan.textContent = lessoncoynt;
+    if (lessonsKey) lessonSpan.dataset.i18nKey = lessonsKey;
 
     lessons.append(icon, lessonSpan);
 
@@ -133,6 +144,7 @@ function initPage() {
     button.className = "tech-apply";
     button.type = "button";
     button.textContent = "Müraciət et";
+    if (applyKey) button.dataset.i18nKey = applyKey;
 
 
     footer.append(lessons, button);
@@ -182,6 +194,11 @@ function initPage() {
           program.img,
           program.desc,
           program.lessons,
+          {
+            badgeKey: program.badgeKey,
+            titleKey: program.titleKey,
+            descKey: program.descKey,
+          }
 
         )
       );
@@ -189,6 +206,87 @@ function initPage() {
     techProgramsGrid.insertBefore(fragment, techProgramsGrid.firstChild);
   }
 
+  const applyTranslations = (dictionary) => {
+    getI18nNodes().forEach((element) => {
+      const key = element.dataset.i18nKey;
+      const translation = dictionary[key];
+      if (typeof translation === "string") {
+        if (element.tagName === "INPUT" || element.tagName === "TEXTAREA") {
+          element.placeholder = translation;
+        } else {
+          element.textContent = translation;
+        }
+      }
+    });
+    formatStudyDescriptions();
+  };
+
+  const loadTranslationFile = async (code) => {
+    if (translationCache[code]) {
+      return translationCache[code];
+    }
+    try {
+      const response = await fetch(`/${code}.json`);
+      if (!response.ok) {
+        throw new Error(`Unable to fetch ${code}.json`);
+      }
+      const data = await response.json();
+      translationCache[code] = data;
+      return data;
+    } catch (error) {
+      console.error(error);
+      return {};
+    }
+  };
+
+  const setLanguage = (code) => {
+    loadTranslationFile(code).then((dictionary) => {
+      applyTranslations(dictionary);
+    });
+  };
+
+  const updateLanguageByAttr = (langAttr) => {
+    const normalizedLang = LANGUAGE_MAP[langAttr] || LANGUAGE_MAP[DEFAULT_LANGUAGE];
+    setLanguage(normalizedLang);
+  };
+
+  const handleSelection = (button) => {
+    const lang = button.dataset.lang;
+    const flag = button.dataset.flag;
+    if (lang && languageLabel) {
+      languageLabel.textContent = lang;
+    }
+    if (flag && languageFlag) {
+      languageFlag.src = flag;
+    }
+    languageButtons.forEach((btn) => {
+      if (btn === button) {
+        btn.setAttribute("aria-current", "true");
+      } else {
+        btn.removeAttribute("aria-current");
+      }
+    });
+    closeMenu();
+    updateLanguageByAttr(lang);
+  };
+
+  const fadeFlagImage = (img, targetSrc) => {
+    if (!img || !targetSrc) return;
+    if (img.dataset.fadeTimeout) {
+      clearTimeout(Number(img.dataset.fadeTimeout));
+    }
+    const currentSrc = img.dataset.currentSrc || img.src;
+    if (currentSrc === targetSrc) return;
+    img.style.transition = "opacity 0.1s ease";
+    img.style.opacity = "0";
+    const timeoutId = window.setTimeout(() => {
+      img.src = targetSrc;
+      img.style.opacity = "1";
+      img.dataset.currentSrc = targetSrc;
+      delete img.dataset.fadeTimeout;
+    }, 100);
+    img.dataset.fadeTimeout = timeoutId.toString();
+  };
 
 
   const alignEllipses = () => {
@@ -469,7 +567,19 @@ function initPage() {
   };
 
 
-  formatStudyDescriptions();
+  languageButtons.forEach((btn) => {
+    const flagImg = btn.querySelector(".dropdown-flag-icon");
+    const baseFlag = btn.dataset.flag;
+    const rectFlag = btn.dataset.rectFlag;
+    if (flagImg) {
+      flagImg.dataset.currentSrc = flagImg.src;
+      btn.addEventListener("mouseenter", () => fadeFlagImage(flagImg, rectFlag || baseFlag));
+      btn.addEventListener("mouseleave", () => fadeFlagImage(flagImg, baseFlag));
+    }
+    btn.addEventListener("click", () => handleSelection(btn));
+  });
+
+  updateLanguageByAttr(DEFAULT_LANGUAGE);
   alignEllipses();
   window.addEventListener("resize", alignEllipses);
   enableHeroElementSwap();
