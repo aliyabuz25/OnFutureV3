@@ -34,9 +34,11 @@ app.use(helmet({
       "script-src": ["'self'", "'unsafe-inline'", "https://cdn.jsdelivr.net"],
       "style-src": ["'self'", "'unsafe-inline'", "https://fonts.googleapis.com", "https://cdn.jsdelivr.net"],
       "font-src": ["'self'", "data:", "https://fonts.gstatic.com", "https://cdn.jsdelivr.net"],
-      "connect-src": ["'self'", "https://cdn.jsdelivr.net"]
+      "connect-src": ["'self'", "https://cdn.jsdelivr.net"],
+      "upgrade-insecure-requests": null,
     },
   },
+  crossOriginResourcePolicy: { policy: "cross-origin" }
 }));
 app.use(morgan('combined'));
 app.use(express.json());
