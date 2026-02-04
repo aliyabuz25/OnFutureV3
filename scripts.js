@@ -24,13 +24,18 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 async function loadSections() {
-  for (const { id, path } of SECTION_TARGETS) {
+  const promises = SECTION_TARGETS.map(async ({ id, path }) => {
     const container = document.getElementById(id);
-    if (!container) continue;
-    const response = await fetch(path);
-    if (!response.ok) continue;
-    container.innerHTML = await response.text();
-  }
+    if (!container) return;
+    try {
+      const response = await fetch(path);
+      if (!response.ok) return;
+      container.innerHTML = await response.text();
+    } catch (e) {
+      console.error(`Failed to load section ${id} from ${path}`, e);
+    }
+  });
+  await Promise.all(promises);
 }
 
 function initPage() {
