@@ -40,30 +40,23 @@ app.use(helmet({
 }));
 app.use(morgan('combined'));
 app.use(express.json());
+
+// 1. Serve static files FIRST
 app.use(express.static(ROOT));
 
-// --- API Endpoints ---
-
-// Get all content
+// 2. API Endpoints
 app.get('/api/content', (req, res) => {
   fs.readFile(contentPath, 'utf8', (err, data) => {
     if (err) return res.json({});
-    try {
-      res.json(JSON.parse(data));
-    } catch (e) {
-      res.json({});
-    }
+    try { res.json(JSON.parse(data)); } catch (e) { res.json({}); }
   });
 });
 
-// Update content (merge)
 app.post('/api/content', (req, res) => {
   const newContent = req.body;
   fs.readFile(contentPath, 'utf8', (err, data) => {
     let current = {};
-    if (!err) {
-      try { current = JSON.parse(data); } catch (e) { }
-    }
+    if (!err) { try { current = JSON.parse(data); } catch (e) { } }
     const updated = { ...current, ...newContent };
     fs.writeFile(contentPath, JSON.stringify(updated, null, 2), (err) => {
       if (err) return res.status(500).json({ error: 'Save failed' });
@@ -72,18 +65,14 @@ app.post('/api/content', (req, res) => {
   });
 });
 
-// Upload image using Multer
 app.post('/api/upload', upload.single('file'), (req, res) => {
   if (!req.file) return res.status(400).json({ error: 'No file uploaded' });
   res.json({ url: `/assets/uploads/${req.file.filename}` });
 });
 
-// --- Proxy /cdn logic (Keeping it for existing UI) ---
 app.get('/cdn', async (req, res) => {
   const target = req.query.url;
   if (!target) return res.status(400).send('Missing url');
-  // Basic proxy logic can be added here or use a library like 'http-proxy-middleware'
-  // To keep it simple and consistent with previous behavior, we can still use the raw https request
   const https = require('https');
   try {
     const targetUrl = new URL(target);
@@ -91,18 +80,13 @@ app.get('/cdn', async (req, res) => {
       res.writeHead(proxyRes.statusCode, proxyRes.headers);
       proxyRes.pipe(res);
     }).on('error', () => res.status(502).send('Gateway Error'));
-  } catch (e) {
-    res.status(400).send('Invalid URL');
-  }
+  } catch (e) { res.status(400).send('Invalid URL'); }
 });
 
-// Fallback to index.html for SPA-like behavior if needed, 
-// though here we mainly serve static files.
-app.get('*', (req, res) => {
-  const filePath = path.join(ROOT, req.path);
-  if (fs.existsSync(filePath) && fs.statSync(filePath).isFile()) {
-    return res.sendFile(filePath);
-  }
+// 3. Fallback for SPA (only for routes that don't match files)
+app.use((req, res) => {
+  // If it's an API request, return 404 instead of index.html
+  if (req.path.startsWith('/api')) return res.status(404).json({ error: 'API Not Found' });
   res.sendFile(path.join(ROOT, 'index.html'));
 });
 

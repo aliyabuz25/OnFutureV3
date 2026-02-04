@@ -222,7 +222,8 @@
                 currentContent = await res.json();
                 renderAll();
             } catch (e) {
-                showToast('Hata', 'İçerik yüklenemedi', 'danger');
+                showToast('Hata', 'İçerik yüklenemedi: ' + e.message, 'danger');
+                console.error(e);
             }
         }
 
