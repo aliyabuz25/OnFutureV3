@@ -499,6 +499,17 @@ function initPage() {
       question.setAttribute("aria-expanded", "false");
       if (icon) icon.textContent = "+";
       question.addEventListener("click", () => {
+        // Close all other items
+        faqItems.forEach((otherItem) => {
+          if (otherItem !== item && otherItem.classList.contains("open")) {
+            otherItem.classList.remove("open");
+            const otherQuestion = otherItem.querySelector(".faq-question");
+            const otherIcon = otherQuestion?.querySelector(".faq-icon");
+            if (otherQuestion) otherQuestion.setAttribute("aria-expanded", "false");
+            if (otherIcon) otherIcon.textContent = "+";
+          }
+        });
+
         const isOpen = item.classList.toggle("open");
         question.setAttribute("aria-expanded", isOpen ? "true" : "false");
         if (icon) icon.textContent = isOpen ? "-" : "+";

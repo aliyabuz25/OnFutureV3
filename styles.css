@@ -14,6 +14,7 @@ body {
     margin: 0;
     padding: 0;
     font-family: 'Poppins', sans-serif;
+    scroll-behavior: smooth;
 }
 
 body {
@@ -500,13 +501,11 @@ body>div[id$="-container"]:not(#hero-container) {
     display: flex;
     width: 100%;
     max-width: 1440px;
-    padding: 0 clamp(20px, 5vw, 80px);
-    /* Responsive padding for 'dibdə' look */
+    padding: 0 88px;
     align-items: center;
-    /* Changed from flex-start to center */
     color: #dfe2ff;
     font-family: var(--Font-Family-Headline, "DM Sans");
-    margin: 44px auto 82px;
+    margin: 44px auto 44px;
 }
 
 .hero-nav .navbar-brand {
@@ -529,7 +528,7 @@ body>div[id$="-container"]:not(#hero-container) {
     /* Push actions to the far right */
     display: flex;
     align-items: center;
-    gap: 16px;
+    gap: 24px;
     flex-wrap: nowrap;
     /* Prevent wrapping in desktop view */
     flex-direction: row;
@@ -1352,13 +1351,7 @@ body>div[id$="-container"]:not(#hero-container) {
     border-radius: 0 !important;
 }
 
-.visa-support-card:hover .visa-support-arrow {
-    background: #ffffff;
-}
 
-.visa-support-card:hover .visa-support-arrow span {
-    color: #14132d;
-}
 
 .visa-support-card:hover .visa-support-title,
 .visa-support-card:hover .visa-support-subtitle,
@@ -1413,10 +1406,31 @@ body>div[id$="-container"]:not(#hero-container) {
     right: 40px;
 }
 
-.visa-support-arrow span {
-    color: #ffffff;
-    font-size: 18px;
-    transition: color 0.25s ease;
+.visa-support-arrow img {
+    width: 24px;
+    height: 24px;
+    object-fit: contain;
+    filter: brightness(0) invert(1);
+    /* default white */
+    transition: filter 0.25s ease;
+}
+
+/* Card hovered, arrow NOT hovered */
+.visa-support-card:hover .visa-support-arrow:not(:hover) {
+    background: #ffffff;
+}
+
+.visa-support-card:hover .visa-support-arrow:not(:hover) img {
+    filter: brightness(0);
+}
+
+/* Arrow hovered */
+.visa-support-arrow:hover {
+    background: rgb(82, 234, 195);
+}
+
+.visa-support-arrow:hover img {
+    filter: brightness(0) invert(1);
 }
 
 .tech-courses {
@@ -1680,109 +1694,99 @@ body>div[id$="-container"]:not(#hero-container) {
     box-shadow: 0 0 0 2px rgba(64, 61, 150, 0.35);
 }
 
-.scholarship {
-    width: 100%;
-    margin-top: 0;
-    padding: 44px 0;
+
+.scholarship-banner {
+    width: calc(100% + clamp(16px, 4vw, 80px) * 2);
+    margin-left: calc(-1 * clamp(16px, 4vw, 80px));
+    margin-right: calc(-1 * clamp(16px, 4vw, 80px));
     background: linear-gradient(90deg, #1e1d43 0%, #3d3a86 50%, #353376 77%);
+    display: flex;
+    justify-content: center;
 }
 
-.scholarship-banner-container {
+.scholarship-banner-inner {
     width: 100%;
-}
-
-.scholarship-inner {
-    width: 100%;
-    padding: 0;
+    max-width: 1440px;
+    padding: 44px 80px;
     display: flex;
     flex-direction: column;
     align-items: center;
     gap: 12px;
 }
 
-.scholarship-pill {
+.scholarship-badge {
     padding: 4px 12px 4px 8px;
-    background: #f5f5fc;
+    background: var(--Primary-Color-50, #F5F5FC);
     border-radius: 24px;
-    color: #6560e0;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+}
+
+.scholarship-badge-text {
+    text-align: center;
+    color: var(--Primary-Color-Main, #6560E0);
     font-size: 12px;
-    font-family: "Poppins", sans-serif;
+    font-family: Poppins;
     font-weight: 500;
     line-height: 16px;
 }
 
 .scholarship-content {
-    width: 100%;
+    align-self: stretch;
     display: flex;
     flex-direction: column;
     align-items: center;
     gap: 32px;
 }
 
-.scholarship-text {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 16px;
-    text-align: center;
-}
-
 .scholarship-title {
-    width: 738px;
-    max-width: 100%;
-    margin: 0 auto;
+    color: var(--Neutral-Color-50, #FFF);
     text-align: center;
-    color: var(--Neutral-Color-1100, #000);
-    font-family: var(--Font-Family-Headline, "DM Sans");
-    font-size: var(--Font-Size-48, 48px);
+    font-family: "DM Sans";
+    font-size: 48px;
     font-style: normal;
     font-weight: 500;
-    line-height: var(--Line-Height-56, 56px);
+    line-height: 56px;
+    margin: 0;
 }
 
-.scholarship-sub {
-    margin: 0;
-    color: var(--Neutral-Color-500, #737373);
+.scholarship-desc {
+    color: var(--Neutral-Color-300, #C8C8C8);
     text-align: center;
-    font-family: var(--Font-Family-Body, Poppins);
-    font-size: var(--Font-Size-20, 20px);
+    font-family: Poppins;
+    font-size: 16px;
     font-style: normal;
     font-weight: 400;
-    line-height: var(--Line-Height-32, 32px);
-    align-self: stretch;
-}
-
-.scholarship-cta {
-    padding: 12px 24px;
-    border-radius: 100px;
-    outline: 1px solid #ffffff;
-    outline-offset: -1px;
-    background: transparent;
-    color: #ffffff;
-    font-size: 14px;
-    font-family: "Poppins", sans-serif;
-    font-weight: 400;
-    box-shadow: 4px 11px 22.8px rgba(0, 0, 0, 0.06);
-    border: none;
-    cursor: pointer;
-    transition: background 0.2s ease, color 0.2s ease;
-}
-
-.scholarship-cta:hover {
-    background: rgba(255, 255, 255, 0.08);
+    line-height: 24px;
+    margin: 0;
 }
 
 .scholarship-banner-cta {
+    display: inline-flex;
+    padding: 12px 24px;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    border-radius: 100px;
+    border: 1px solid var(--Neutral-Color-50, #FFF);
     background: transparent;
-    color: #ffffff;
-    transition: background 0.2s ease, color 0.2s ease, outline-color 0.2s ease;
+    box-shadow: 4px 11px 22.8px 0px rgba(0, 0, 0, 0.06);
+    color: #FFF;
+    font-family: Poppins;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 20px;
+    cursor: pointer;
+    transition: all 0.2s ease;
 }
 
 .scholarship-banner-cta:hover {
-    background: #ffffff;
-    color: #0a0a0a;
-    outline-color: #ffffff;
+    background: #FFF;
+    color: #1e1d43;
 }
+
 
 .faq-section {
     width: 100%;
@@ -1965,16 +1969,18 @@ body>div[id$="-container"]:not(#hero-container) {
     background: #FFF;
     border-top: 1px solid #EEE;
     padding: 0;
+    width: calc(100% + clamp(16px, 4vw, 80px) * 2);
+    margin-left: calc(-1 * clamp(16px, 4vw, 80px));
+    margin-right: calc(-1 * clamp(16px, 4vw, 80px));
 }
 
 .footer-inner {
     width: 100%;
     max-width: 1440px;
     margin: 0 auto;
-    padding: 80px 80px 40px;
-    display: grid;
-    grid-template-columns: 320px 1fr;
-    gap: 80px;
+    padding: 44px 80px;
+    display: flex;
+    gap: 134px;
 }
 
 .footer-brand {
@@ -1997,9 +2003,19 @@ body>div[id$="-container"]:not(#hero-container) {
 }
 
 
+.footer-brand {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 20px;
+    width: 320px;
+    flex-shrink: 0;
+}
+
 .footer-columns {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
+    width: 100%;
     gap: 40px;
 }
 
@@ -2011,11 +2027,11 @@ body>div[id$="-container"]:not(#hero-container) {
 
 .footer-col h4 {
     font-size: 16px;
-    font-weight: 600;
+    font-weight: 700;
     color: #111827;
     margin: 0;
-    text-transform: uppercase;
-    letter-spacing: 0.05em;
+    font-family: var(--Font-Family-Headline, "DM Sans");
+    letter-spacing: 0;
 }
 
 .footer-col ul {
@@ -2024,7 +2040,7 @@ body>div[id$="-container"]:not(#hero-container) {
     margin: 0;
     display: flex;
     flex-direction: column;
-    gap: 12px;
+    gap: 16px;
 }
 
 .footer-col li {
@@ -2032,7 +2048,7 @@ body>div[id$="-container"]:not(#hero-container) {
     align-items: center;
     gap: 12px;
     font-size: 14px;
-    color: #4B5563;
+    color: #111827;
 }
 
 .footer-col li a {
@@ -2165,7 +2181,7 @@ body>div[id$="-container"]:not(#hero-container) {
 .service-card {
     width: 100%;
     height: 440px;
-    padding: 24px;
+    padding: 20px 24px;
     position: relative;
     background: var(--Neutral-Color-50, #FFF);
     box-shadow: 0 20px 24px -12px rgba(166, 166, 166, 0.08), 0 8px 8px -12px rgba(166, 166, 166, 0.03);
@@ -2182,7 +2198,8 @@ body>div[id$="-container"]:not(#hero-container) {
     width: 100%;
     max-width: 100%;
     margin: 0;
-    padding: 10px;
+    padding: 0;
+    padding-right: 60px;
     color: var(--Neutral-Color-1000, #0A0A0A);
     font-family: var(--Font-Family-Headline, "DM Sans");
     font-size: var(--Font-Size-32, 32px);
@@ -2201,15 +2218,14 @@ body>div[id$="-container"]:not(#hero-container) {
 
 .service-card p {
     margin: 0;
-    padding: 10px;
+    margin-top: auto;
+    padding: 0;
     color: var(--Neutral-Color-1100, #000);
     font-family: var(--Font-Family-Body, Poppins);
     font-size: var(--Font-Size-16, 16px);
     font-style: normal;
     font-weight: 400 !important;
     line-height: var(--Line-Height-24, 24px);
-    padding-bottom: 12px;
-    margin-bottom: 12px;
 }
 
 .service-card-icon {
@@ -2271,7 +2287,8 @@ body>div[id$="-container"]:not(#hero-container) {
     }
 
     .hero,
-    #hero {
+    #hero,
+    .scholarship-banner {
         width: calc(100% + 80px);
         margin-left: -40px;
         margin-right: -40px;
@@ -2341,6 +2358,12 @@ body>div[id$="-container"]:not(#hero-container) {
         margin-right: -20px;
         min-height: auto;
         padding-bottom: 60px;
+    }
+
+    .scholarship-banner {
+        width: calc(100% + 40px);
+        margin-left: -20px;
+        margin-right: -20px;
     }
 
     .hero-nav {
