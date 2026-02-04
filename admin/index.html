@@ -52,6 +52,13 @@
             </div>
             <div class="col-md-4">
                 <div class="card p-4">
+                    <h4 class="mb-3">Add New Key</h4>
+                    <div class="mb-3">
+                        <input type="text" id="newKeyName" class="form-control" placeholder="e.g., hero.title">
+                    </div>
+                    <button class="btn btn-outline-primary w-100" onclick="addNewKey()">Add Key</button>
+                </div>
+                <div class="card p-4">
                     <h4 class="mb-3">Upload Assets</h4>
                     <div class="mb-3">
                         <label class="form-label">Select Image</label>
@@ -96,15 +103,19 @@
                 return;
             }
 
-            for (const [key, value] of Object.entries(currentContent)) {
+            // Sort keys alphabetically for better management
+            const sortedKeys = Object.keys(currentContent).sort();
+
+            for (const key of sortedKeys) {
+                const value = currentContent[key];
                 const wrapper = document.createElement('div');
                 wrapper.className = 'mb-3';
 
                 const label = document.createElement('label');
-                label.className = 'form-label';
-                label.innerText = key;
+                label.className = 'form-label d-flex justify-content-between';
+                label.innerHTML = `<span>${key}</span> <small class="text-danger" style="cursor:pointer" onclick="deleteKey('${key}')">delete</small>`;
 
-                const input = document.createElement('textarea'); // Using textarea for multiline support
+                const input = document.createElement('textarea');
                 input.className = 'form-control';
                 input.rows = 2;
                 input.value = value;
@@ -115,6 +126,24 @@
                 wrapper.appendChild(label);
                 wrapper.appendChild(input);
                 container.appendChild(wrapper);
+            }
+        }
+
+        function addNewKey() {
+            const input = document.getElementById('newKeyName');
+            const key = input.value.trim();
+            if (!key) return;
+            if (currentContent[key]) return alert('Key already exists');
+
+            currentContent[key] = '';
+            input.value = '';
+            renderFields();
+        }
+
+        function deleteKey(key) {
+            if (confirm(`Delete key "${key}"?`)) {
+                delete currentContent[key];
+                renderFields();
             }
         }
 

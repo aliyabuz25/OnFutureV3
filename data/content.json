@@ -1,1 +1,12 @@
-{ "hero.heading": "Xaricdə təhsil yolculuğunuza peşəkar dəstək ilə başlayın.", "hero.subtitle": "İxtisas seçimi, sənədləşmə və viza dəstəyi — hamısı bir mərkəzdə." }
+{
+  "hero.heading": "Xaricdə təhsil yolculuğunuza peşəkar dəstək ilə başlayın.",
+  "hero.subtitle": "İxtisas seçimi, sənədləşmə və viza dəstəyi — hamısı bir mərkəzdə.",
+  "results.title": "Xaricdə təhsil prosesində etibarlı nəticələr.",
+  "results.desc": "Xaricdə təhsil, sənədləşmə və viza proseslərini peşəkar şəkildə idarə edərək yüzlərlə tələbənin qlobal hədəflərinə çatmasına kömək edirik.",
+  "services.title": "Xidmətlərimiz",
+  "study.title": "Xaricdə təhsil",
+  "visa.title": "Viza xidmətləri",
+  "tech.title": "Təlim Proqramları",
+  "faq.title.line1": "Tez-tez Verilən",
+  "faq.title.line2": "Suallar"
+}

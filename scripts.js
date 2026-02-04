@@ -75,26 +75,17 @@ function initPage() {
       if (!res.ok) return;
       const content = await res.json();
 
-      // Bind keys to DOM elements
-      // For this blueprint adoption, we map "hero.heading" -> ".hero-heading"
-      // In a full implementation, we'd use data-content-key attributes.
-      // Here is a mapping for the demonstration:
-      const manualMapping = {
-        'hero.heading': '.hero-heading',
-        'hero.subtitle': '.hero-subtitle'
-      };
+      // Select all elements that have an i18n key
+      const i18nElements = document.querySelectorAll("[data-i18n-key]");
 
-      for (const [key, selector] of Object.entries(manualMapping)) {
-        if (content[key]) {
-          const els = document.querySelectorAll(selector);
-          els.forEach(el => {
-            // Only override if content is substantial to avoid flicker or empty overrides
-            if (content[key].trim()) el.innerText = content[key];
-          });
+      i18nElements.forEach(el => {
+        const key = el.getAttribute('data-i18n-key');
+        if (content[key] && content[key].trim()) {
+          el.innerText = content[key];
         }
-      }
+      });
 
-      console.log('Universal Management: Content bound.');
+      console.log(`Universal Management: ${Object.keys(content).length} keys checked.`);
     } catch (e) {
       console.warn('Universal Management: Failed to bind content', e);
     }
