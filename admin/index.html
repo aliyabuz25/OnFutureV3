@@ -1,79 +1,210 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="az">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>OnFuture Admin</title>
+    <title>OnFuture Admin - Premium Management</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
     <style>
+        :root {
+            --sidebar-width: 280px;
+            --primary-navy: #14132D;
+            --accent-cyan: #00D1FF;
+        }
+
         body {
-            background: #f4f6f9;
+            background: #f8f9fa;
+            min-height: 100vh;
+            display: flex;
+            font-family: 'Inter', sans-serif;
+        }
+
+        /* Sidebar */
+        .sidebar {
+            width: var(--sidebar-width);
+            background: var(--primary-navy);
+            color: white;
+            height: 100vh;
+            position: fixed;
+            left: 0;
+            top: 0;
+            display: flex;
+            flex-direction: column;
+            padding: 24px;
+            z-index: 1000;
+        }
+
+        .sidebar-brand {
+            font-size: 24px;
+            font-weight: 700;
+            margin-bottom: 40px;
+            color: var(--accent-cyan);
+        }
+
+        .nav-link {
+            color: rgba(255, 255, 255, 0.7);
+            padding: 12px 16px;
+            border-radius: 8px;
+            margin-bottom: 8px;
+            transition: all 0.2s;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            cursor: pointer;
+        }
+
+        .nav-link:hover {
+            background: rgba(255, 255, 255, 0.1);
+            color: white;
+        }
+
+        .nav-link.active {
+            background: var(--accent-cyan);
+            color: white;
+            font-weight: 600;
+        }
+
+        /* Main Content */
+        .main-content {
+            margin-left: var(--sidebar-width);
+            flex: 1;
             padding: 40px;
+        }
+
+        .section-panel {
+            display: none;
+        }
+
+        .section-panel.active {
+            display: block;
         }
 
         .card {
             border: none;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-            margin-bottom: 20px;
+            border-radius: 12px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.02);
+            margin-bottom: 24px;
         }
 
         .form-label {
-            font-weight: 500;
-            color: #495057;
+            font-weight: 600;
+            font-size: 0.9rem;
+            color: #4b5563;
+        }
+
+        .btn-primary {
+            background: var(--primary-navy);
+            border: none;
+            padding: 10px 24px;
+            border-radius: 8px;
+        }
+
+        .btn-primary:hover {
+            background: #1e1d43;
+        }
+
+        .upload-zone {
+            border: 2px dashed #e5e7eb;
+            border-radius: 12px;
+            padding: 24px;
+            text-align: center;
+            transition: all 0.2s;
+            cursor: pointer;
+        }
+
+        .upload-zone:hover {
+            border-color: var(--accent-cyan);
+            background: rgba(0, 209, 255, 0.02);
+        }
+
+        .image-preview {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            border-radius: 8px;
+            margin-bottom: 12px;
         }
 
         .toast-container {
             position: fixed;
-            top: 20px;
-            right: 20px;
-            z-index: 1055;
+            bottom: 24px;
+            right: 24px;
+            z-index: 9999;
         }
     </style>
 </head>
 
 <body>
 
-    <div class="container">
-        <div class="d-flex justify-content-between align-items-center mb-4">
-            <h1>OnFuture Admin</h1>
-            <button class="btn btn-primary" onclick="saveContent()">Save Changes</button>
+    <div class="sidebar">
+        <div class="sidebar-brand">OnFuture.</div>
+        <nav class="nav flex-column">
+            <div class="nav-link active" onclick="switchSection('general')"><i class="bi bi-grid"></i> Genel İçerik
+            </div>
+            <div class="nav-link" onclick="switchSection('services')"><i class="bi bi-briefcase"></i> Xidmətlərimiz
+            </div>
+            <div class="nav-link" onclick="switchSection('study')"><i class="bi bi-mortarboard"></i> Xaricdə Təhsil
+            </div>
+            <div class="nav-link" onclick="switchSection('gallery')"><i class="bi bi-images"></i> Görsellər</div>
+        </nav>
+        <div class="mt-auto">
+            <button class="btn btn-primary w-100" onclick="saveAll()">
+                <i class="bi bi-cloud-arrow-up"></i> Değişiklikleri Kaydet
+            </button>
         </div>
+    </div>
 
-        <div class="row">
-            <div class="col-md-8">
-                <div class="card p-4">
-                    <h4 class="mb-3">Text Content</h4>
-                    <div id="content-fields">
-                        <!-- Dynamic fields will be injected here -->
-                        <div class="text-center text-muted">Loading content...</div>
-                    </div>
+    <div class="main-content">
+        <!-- General Section -->
+        <div id="general" class="section-panel active">
+            <h2 class="mb-4">Genel İçerik Yönetimi</h2>
+            <div class="card p-4">
+                <h5 class="mb-3">Yeni Anahtar Ekle</h5>
+                <div class="input-group mb-3">
+                    <input type="text" id="newKeyName" class="form-control" placeholder="Örn: hero.title">
+                    <button class="btn btn-outline-primary" onclick="addNewKey()">Ekle</button>
                 </div>
             </div>
-            <div class="col-md-4">
-                <div class="card p-4">
-                    <h4 class="mb-3">Add New Key</h4>
-                    <div class="mb-3">
-                        <input type="text" id="newKeyName" class="form-control" placeholder="e.g., hero.title">
-                    </div>
-                    <button class="btn btn-outline-primary w-100" onclick="addNewKey()">Add Key</button>
+            <div id="general-fields" class="row">
+                <!-- Dynamic fields -->
+            </div>
+        </div>
+
+        <!-- Services Section -->
+        <div id="services" class="section-panel">
+            <div class="d-flex justify-content-between align-items-center mb-4">
+                <h2>Xidmətlərimiz</h2>
+                <button class="btn btn-outline-primary" onclick="addListBlock('services')">+ Yeni Hizmet Ekle</button>
+            </div>
+            <div id="services-list" class="row">
+                <!-- Service cards will be rendered here -->
+            </div>
+        </div>
+
+        <!-- Study Section -->
+        <div id="study" class="section-panel">
+            <div class="d-flex justify-content-between align-items-center mb-4">
+                <h2>Xaricdə Təhsil</h2>
+                <button class="btn btn-outline-primary" onclick="addListBlock('study')">+ Yeni Kart Ekle</button>
+            </div>
+            <div id="study-list" class="row">
+                <!-- Study cards will be rendered here -->
+            </div>
+        </div>
+
+        <!-- Gallery Section -->
+        <div id="gallery" class="section-panel">
+            <h2 class="mb-4">Medya Yönetimi</h2>
+            <div class="card p-4">
+                <div class="upload-zone" onclick="document.getElementById('globalFile').click()">
+                    <i class="bi bi-cloud-upload fs-1 text-muted"></i>
+                    <p class="mt-2 mb-0">Tıklayın veya dosyayı sürükleyin</p>
+                    <input type="file" id="globalFile" class="d-none" onchange="uploadGlobal(this)">
                 </div>
-                <div class="card p-4">
-                    <h4 class="mb-3">Upload Assets</h4>
-                    <div class="mb-3">
-                        <label class="form-label">Select Image</label>
-                        <input type="file" id="fileInput" class="form-control">
-                    </div>
-                    <button class="btn btn-secondary w-100" onclick="uploadFile()">Upload</button>
-                    <div id="upload-result" class="mt-3 text-break text-muted small"></div>
-                </div>
-                <div class="card p-4">
-                    <h4 class="mb-3">Instructions</h4>
-                    <p class="small text-muted">
-                        Double-click text on the main website to see the key name, then edit it here.
-                        <br><br>
-                        Uploaded images will return a URL you can use in content fields.
-                    </p>
+                <div id="gallery-grid" class="mt-4 row g-3">
+                    <!-- Uploaded images will appear here -->
                 </div>
             </div>
         </div>
@@ -83,136 +214,219 @@
 
     <script>
         let currentContent = {};
+        let activeSection = 'general';
 
-        async function fetchContent() {
+        async function init() {
             try {
                 const res = await fetch('/api/content');
                 currentContent = await res.json();
-                renderFields();
+                renderAll();
             } catch (e) {
-                showToast('Error', 'Failed to load content', 'danger');
+                showToast('Hata', 'İçerik yüklenemedi', 'danger');
             }
         }
 
-        function renderFields() {
-            const container = document.getElementById('content-fields');
+        function switchSection(id) {
+            document.querySelectorAll('.section-panel').forEach(p => p.classList.remove('active'));
+            document.querySelectorAll('.nav-link').forEach(l => l.classList.remove('active'));
+            document.getElementById(id).classList.add('active');
+            event.currentTarget.classList.add('active');
+            activeSection = id;
+        }
+
+        function renderAll() {
+            renderGeneral();
+            renderServices();
+            renderStudy();
+        }
+
+        function renderGeneral() {
+            const container = document.getElementById('general-fields');
             container.innerHTML = '';
-
-            if (Object.keys(currentContent).length === 0) {
-                container.innerHTML = '<p class="text-muted">No content keys found. Content file might be empty.</p>';
-                return;
-            }
-
-            // Sort keys alphabetically for better management
             const sortedKeys = Object.keys(currentContent).sort();
 
-            for (const key of sortedKeys) {
-                const value = currentContent[key];
-                const wrapper = document.createElement('div');
-                wrapper.className = 'mb-3';
+            sortedKeys.forEach(key => {
+                if (key.startsWith('services.card') || key.startsWith('study.card')) return;
 
-                const label = document.createElement('label');
-                label.className = 'form-label d-flex justify-content-between';
-                label.innerHTML = `<span>${key}</span> <small class="text-danger" style="cursor:pointer" onclick="deleteKey('${key}')">delete</small>`;
-
-                const input = document.createElement('textarea');
-                input.className = 'form-control';
-                input.rows = 2;
-                input.value = value;
-                input.onchange = (e) => {
-                    currentContent[key] = e.target.value;
-                };
-
-                wrapper.appendChild(label);
-                wrapper.appendChild(input);
-                container.appendChild(wrapper);
-            }
+                const card = `
+                <div class="col-md-6 mb-3">
+                    <div class="card p-3">
+                        <label class="form-label d-flex justify-content-between">
+                            ${key}
+                            <span class="text-danger small" style="cursor:pointer" onclick="deleteKey('${key}')">Sil</span>
+                        </label>
+                        <textarea class="form-control" rows="2" onchange="updateKey('${key}', this.value)">${currentContent[key]}</textarea>
+                    </div>
+                </div>
+            `;
+                container.insertAdjacentHTML('beforeend', card);
+            });
         }
+
+        function renderServices() {
+            const container = document.getElementById('services-list');
+            container.innerHTML = '';
+
+            // Group services by index (e.g. card1, card2)
+            const services = {};
+            Object.keys(currentContent).forEach(key => {
+                if (key.startsWith('services.card')) {
+                    const match = key.match(/services\.card(\d+)\.(.+)/);
+                    if (match) {
+                        const idx = match[1];
+                        const field = match[2];
+                        if (!services[idx]) services[idx] = {};
+                        services[idx][field] = currentContent[key];
+                    }
+                }
+            });
+
+            Object.keys(services).sort((a, b) => a - b).forEach(idx => {
+                const s = services[idx];
+                const html = `
+                <div class="col-md-4 mb-4">
+                    <div class="card p-3 border-top border-4" style="border-top-color: var(--accent-cyan) !important">
+                        <div class="d-flex justify-content-between mb-2">
+                             <small class="text-muted fw-bold">CARD ${idx}</small>
+                             <button class="btn btn-sm text-danger" onclick="deleteBlock('services', ${idx})">Sil</button>
+                        </div>
+                        <input class="form-control mb-2 fw-bold" value="${s.title || ''}" onchange="updateKey('services.card${idx}.title', this.value)" placeholder="Başlık">
+                        <textarea class="form-control mb-2" rows="3" onchange="updateKey('services.card${idx}.desc', this.value)" placeholder="Açıklama">${s.desc || ''}</textarea>
+                    </div>
+                </div>
+            `;
+                container.insertAdjacentHTML('beforeend', html);
+            });
+        }
+
+        function renderStudy() {
+            const container = document.getElementById('study-list');
+            container.innerHTML = '';
+
+            const cards = {};
+            Object.keys(currentContent).forEach(key => {
+                if (key.startsWith('study.card')) {
+                    const match = key.match(/study\.card(\d+)\.(.+)/);
+                    if (match) {
+                        const idx = match[1];
+                        const field = match[2];
+                        if (!cards[idx]) cards[idx] = {};
+                        cards[idx][field] = currentContent[key];
+                    }
+                }
+            });
+
+            Object.keys(cards).sort((a, b) => a - b).forEach(idx => {
+                const c = cards[idx];
+                const html = `
+                <div class="col-md-6 mb-4">
+                    <div class="card p-3">
+                        <div class="d-flex justify-content-between mb-2">
+                             <small class="text-muted fw-bold">STUDY CARD ${idx}</small>
+                             <button class="btn btn-sm text-danger" onclick="deleteBlock('study', ${idx})">Sil</button>
+                        </div>
+                        <div class="row g-2">
+                            <div class="col-12"><input class="form-control fw-bold" value="${c.title || ''}" onchange="updateKey('study.card${idx}.title', this.value)" placeholder="Okul Adı"></div>
+                            <div class="col-12"><textarea class="form-control" rows="2" onchange="updateKey('study.card${idx}.desc', this.value)" placeholder="Bölüm/Açıklama">${c.desc || ''}</textarea></div>
+                            <div class="col-6"><input class="form-control small" value="${c.location || ''}" onchange="updateKey('study.card${idx}.location', this.value)" placeholder="Konum"></div>
+                            <div class="col-6"><input class="form-control small" value="${c.due || ''}" onchange="updateKey('study.card${idx}.due', this.value)" placeholder="Son Tarih"></div>
+                        </div>
+                    </div>
+                </div>
+            `;
+                container.insertAdjacentHTML('beforeend', html);
+            });
+        }
+
+        function updateKey(key, val) { currentContent[key] = val; }
 
         function addNewKey() {
-            const input = document.getElementById('newKeyName');
-            const key = input.value.trim();
-            if (!key) return;
-            if (currentContent[key]) return alert('Key already exists');
-
-            currentContent[key] = '';
-            input.value = '';
-            renderFields();
-        }
-
-        function deleteKey(key) {
-            if (confirm(`Delete key "${key}"?`)) {
-                delete currentContent[key];
-                renderFields();
+            const k = document.getElementById('newKeyName').value.trim();
+            if (k && !currentContent[k]) {
+                currentContent[k] = '';
+                document.getElementById('newKeyName').value = '';
+                renderGeneral();
             }
         }
 
-        async function saveContent() {
+        function deleteKey(k) { if (confirm('Emin misiniz?')) { delete currentContent[k]; renderGeneral(); } }
+
+        function addListBlock(type) {
+            // Find max index
+            let max = 0;
+            Object.keys(currentContent).forEach(key => {
+                if (key.startsWith(type + '.card')) {
+                    const m = key.match(new RegExp(type + '\\.card(\\d+)'));
+                    if (m) max = Math.max(max, parseInt(m[1]));
+                }
+            });
+            const next = max + 1;
+            if (type === 'services') {
+                currentContent[`services.card${next}.title`] = 'Yeni Hizmet';
+                currentContent[`services.card${next}.desc`] = 'Açıklama giriniz...';
+                renderServices();
+            } else {
+                currentContent[`study.card${next}.title`] = 'Yeni Okul';
+                currentContent[`study.card${next}.desc`] = 'Bölüm detayları...';
+                currentContent[`study.card${next}.location`] = 'Şehir, Ülke';
+                currentContent[`study.card${next}.due`] = 'Tarih';
+                renderStudy();
+            }
+        }
+
+        function deleteBlock(type, idx) {
+            if (!confirm('Bu bloğu silmek istediğinize emin misiniz?')) return;
+            Object.keys(currentContent).forEach(key => {
+                if (key.startsWith(`${type}.card${idx}.`)) delete currentContent[key];
+            });
+            type === 'services' ? renderServices() : renderStudy();
+        }
+
+        async function saveAll() {
             try {
                 const res = await fetch('/api/content', {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify(currentContent)
                 });
-                if (res.ok) {
-                    showToast('Success', 'Content saved successfully!', 'success');
-                } else {
-                    throw new Error('Save failed');
-                }
-            } catch (e) {
-                showToast('Error', 'Failed to save changes.', 'danger');
-            }
+                if (res.ok) showToast('Başarılı', 'Tüm içerik güncellendi!', 'success');
+            } catch (e) { showToast('Hata', 'Kaydedilemedi', 'danger'); }
         }
 
-        async function uploadFile() {
-            const fileInput = document.getElementById('fileInput');
-            if (!fileInput.files.length) return alert('Select a file first');
-
-            const file = fileInput.files[0];
-
-            // Use raw binary upload as per server.js implementation plan
-            // POST /api/upload?name=filename
+        async function uploadGlobal(input) {
+            const file = input.files[0];
+            if (!file) return;
             try {
                 const res = await fetch(`/api/upload?name=${encodeURIComponent(file.name)}`, {
                     method: 'POST',
                     body: file
                 });
                 const data = await res.json();
-
                 if (res.ok) {
-                    document.getElementById('upload-result').innerHTML = `Saved at: <code>${data.url}</code> (Copy this!)`;
-                    showToast('Success', 'Image uploaded!', 'success');
-                } else {
-                    throw new Error(data.error || 'Upload failed');
-                }
-            } catch (e) {
-                showToast('Error', 'Upload failed: ' + e.message, 'danger');
-            }
-        }
-
-        function showToast(title, message, type = 'info') {
-            const container = document.querySelector('.toast-container');
-            const id = 'toast-' + Date.now();
-            const html = `
-            <div id="${id}" class="toast align-items-center text-bg-${type} border-0" role="alert" aria-live="assertive" aria-atomic="true">
-                <div class="d-flex">
-                    <div class="toast-body">
-                        <strong>${title}</strong>: ${message}
+                    const html = `
+                    <div class="col-md-3">
+                        <div class="card p-2 text-center h-100">
+                            <img src="${data.url}" class="image-preview">
+                            <code class="small d-block mb-2">${data.url}</code>
+                            <button class="btn btn-sm btn-outline-secondary" onclick="navigator.clipboard.writeText('${data.url}')">Kopyala</button>
+                        </div>
                     </div>
-                    <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
-                </div>
-            </div>
-        `;
-            container.insertAdjacentHTML('beforeend', html);
-            const toastEl = document.getElementById(id);
-            const toast = new bootstrap.Toast(toastEl);
-            toast.show();
-            toastEl.addEventListener('hidden.bs.toast', () => {
-                toastEl.remove();
-            });
+                `;
+                    document.getElementById('gallery-grid').insertAdjacentHTML('afterbegin', html);
+                    showToast('Başarılı', 'Görsel yüklendi', 'success');
+                }
+            } catch (e) { showToast('Hata', 'Yükleme başarısız', 'danger'); }
         }
 
-        fetchContent();
+        function showToast(title, msg, type) {
+            const container = document.querySelector('.toast-container');
+            const id = 't' + Date.now();
+            const html = `<div id="${id}" class="toast align-items-center text-bg-${type} border-0 show overflow-hidden"><div class="d-flex"><div class="toast-body"><strong>${title}</strong>: ${msg}</div><button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast"></button></div><div class="toast-progress" style="height:3px; background:rgba(255,255,255,0.3); width:100%"></div></div>`;
+            container.insertAdjacentHTML('beforeend', html);
+            setTimeout(() => document.getElementById(id)?.remove(), 3000);
+        }
+
+        init();
     </script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>

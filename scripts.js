@@ -75,9 +75,12 @@ function initPage() {
       if (!res.ok) return;
       const content = await res.json();
 
-      // Select all elements that have an i18n key
-      const i18nElements = document.querySelectorAll("[data-i18n-key]");
+      // 1. Dynamic Section Rendering (Services & Study)
+      renderDynamicServices(content);
+      renderDynamicStudy(content);
 
+      // 2. Standard Text Binding
+      const i18nElements = document.querySelectorAll("[data-i18n-key]");
       i18nElements.forEach(el => {
         const key = el.getAttribute('data-i18n-key');
         if (content[key] && content[key].trim()) {
@@ -90,6 +93,77 @@ function initPage() {
       console.warn('Universal Management: Failed to bind content', e);
     }
   };
+
+  function renderDynamicServices(content) {
+    const container = document.querySelector('.services-grid-inner');
+    if (!container) return;
+
+    const services = {};
+    Object.keys(content).forEach(key => {
+      if (key.startsWith('services.card')) {
+        const match = key.match(/services\.card(\d+)\.(.+)/);
+        if (match) {
+          const idx = match[1];
+          const field = match[2];
+          if (!services[idx]) services[idx] = {};
+          services[idx][field] = content[key];
+        }
+      }
+    });
+
+    const keys = Object.keys(services).sort((a, b) => a - b);
+    if (keys.length === 0) return;
+
+    container.innerHTML = keys.map(idx => `
+      <article class="service-card">
+          <h3>
+              <span class="service-num">${idx.padStart(2, '0')}.</span>
+              <span>${services[idx].title || ''}</span>
+          </h3>
+          <p>${services[idx].desc || ''}</p>
+          <div class="service-card-icon"><img src="/services/Arrow up-right.png" alt=""></div>
+      </article>
+    `).join('');
+  }
+
+  function renderDynamicStudy(content) {
+    const container = document.querySelector('.study-cards');
+    if (!container) return;
+
+    const cards = {};
+    Object.keys(content).forEach(key => {
+      if (key.startsWith('study.card')) {
+        const match = key.match(/study\.card(\d+)\.(.+)/);
+        if (match) {
+          const idx = match[1];
+          const field = match[2];
+          if (!cards[idx]) cards[idx] = {};
+          cards[idx][field] = content[key];
+        }
+      }
+    });
+
+    const keys = Object.keys(cards).sort((a, b) => a - b);
+    if (keys.length === 0) return;
+
+    container.innerHTML = keys.map(idx => `
+      <article class="study-card">
+        <div class="study-card-figure" style="--study-card-image: url('https://placehold.co/379x177');"></div>
+        <div class="study-card-body">
+          <div class="study-card-title">${cards[idx].title || ''}</div>
+          <p class="study-card-desc">${cards[idx].desc || ''}</p>
+          <div class="study-card-meta">
+            <span>${cards[idx].location || ''}</span>
+            <span>${cards[idx].due || ''}</span>
+          </div>
+        </div>
+        <div class="study-card-footer">
+          <div class="study-card-price">2200€/ <span class="sub">yearly</span></div>
+          <div class="study-card-apply">Apply</div>
+        </div>
+      </article>
+    `).join('');
+  }
 
   // Hotkey to open Admin: Ctrl + Shift + A
   document.addEventListener('keydown', (e) => {
