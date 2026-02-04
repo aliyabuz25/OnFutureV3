@@ -125,16 +125,15 @@ body>div[id$="-container"]:not(#hero-container) {
 
 .hero-content {
     position: absolute;
-    top: clamp(195px, 14vw, 100px);
+    top: clamp(120px, 16vw, 200px);
     left: 50%;
     transform: translateX(-50%);
-    width: min(964px, 100%);
+    width: min(1000px, 95%);
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 4px;
-    padding-top: 0;
-    margin-top: 8px;
+    gap: 8px;
+    z-index: 5;
 }
 
 .hero-grid {
@@ -162,12 +161,10 @@ body>div[id$="-container"]:not(#hero-container) {
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: 8px;
+    gap: 12px;
     flex-wrap: wrap;
     width: 100%;
-    position: relative;
-    top: -20px;
-    margin-top: 12px;
+    margin-top: 24px;
 }
 
 .navbar-nav {
@@ -216,7 +213,15 @@ body>div[id$="-container"]:not(#hero-container) {
 }
 
 .search-button {
-    display: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0.8;
+    transition: opacity 0.2s;
+}
+
+.search-button:hover {
+    opacity: 1;
 }
 
 .hero nav {
@@ -419,13 +424,13 @@ body>div[id$="-container"]:not(#hero-container) {
 
 .hero-heading {
     font-family: var(--Font-Family-Headline, "DM Sans");
-    font-size: var(--Font-Size-72, 72px);
-    font-weight: 400 !important;
-    line-height: var(--Line-Height-84, 84px);
+    font-size: clamp(40px, 5vw, 72px);
+    font-weight: 500 !important;
+    line-height: 1.15;
     color: var(--Neutral-Color-50, #FFF);
     text-align: center;
-    max-width: min(964px, 100%);
-    margin: 6px auto 12px;
+    max-width: 860px;
+    margin: 12px auto;
     width: 100%;
 }
 
@@ -503,48 +508,45 @@ body>div[id$="-container"]:not(#hero-container) {
     display: flex;
     width: 100%;
     max-width: 1440px;
-    padding: 0 88px;
+    padding: 0 4vw;
     align-items: center;
-    color: #dfe2ff;
-    font-family: var(--Font-Family-Headline, "DM Sans");
-    margin: 44px auto 44px;
-}
-
-.hero-nav .navbar-brand {
-    transition: transform 0.25s ease, filter 0.25s ease;
-    transform-origin: center;
-}
-
-.hero-nav.nav-zoom .navbar-brand {
-    transform: scale(0.84);
-    filter: none;
+    margin: 40px auto 0;
 }
 
 .hero-nav .navbar-collapse {
     width: 100%;
-    justify-content: center;
+}
+
+@media (min-width: 992px) {
+    .hero-nav .container-fluid {
+        display: flex !important;
+        justify-content: space-between;
+        align-items: center;
+        position: relative;
+    }
+
+    .hero-nav .navbar-collapse {
+        display: flex !important;
+        justify-content: center;
+    }
+
+    .hero-nav .navbar-nav {
+        position: absolute;
+        left: 50%;
+        transform: translateX(-50%);
+        margin: 0 !important;
+        display: flex;
+        flex-direction: row;
+        gap: clamp(8px, 1.5vw, 24px);
+    }
 }
 
 .hero-nav-actions {
     margin-left: auto;
-    /* Push actions to the far right */
     display: flex;
     align-items: center;
-    gap: 24px;
+    gap: 16px;
     flex-wrap: nowrap;
-    /* Prevent wrapping in desktop view */
-    flex-direction: row;
-    flex-shrink: 0;
-}
-
-.hero-nav-actions .dropdown {
-    order: 1;
-    flex-shrink: 0;
-}
-
-.hero-nav-actions .cta-button {
-    order: 2;
-    flex-shrink: 0;
 }
 
 .hero-nav .dropdown-toggle,
