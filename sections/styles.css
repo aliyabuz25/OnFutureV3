@@ -537,11 +537,11 @@ body>div[id$="-container"]:not(#hero-container) {
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: 32px;
+    gap: 0;
 }
 
 .hero-nav-actions {
-    margin-left: 0;
+    margin-left: 87px;
     display: flex;
     align-items: center;
     gap: 8px;
