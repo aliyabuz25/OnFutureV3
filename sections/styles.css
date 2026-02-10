@@ -1452,10 +1452,11 @@ body>div[id$="-container"]:not(#hero-container) {
 
 .tech-grid {
     display: grid;
-    grid-template-columns: repeat(3, minmax(0, 1fr));
-    gap: 16px;
+    grid-template-columns: repeat(auto-fit, 411px);
+    gap: 24px;
     justify-content: center;
     justify-items: center;
+    width: 100%;
 }
 
 .tech-grid:not(.active) {
@@ -1464,22 +1465,19 @@ body>div[id$="-container"]:not(#hero-container) {
 
 .tech-card {
     display: flex;
-    width: 100%;
-    max-width: 411px;
-    padding: 20px;
+    width: 411px !important;
+    height: 522px !important;
+    padding: 20px !important;
     flex-direction: column;
     align-items: flex-start;
-    gap: 16px;
+    gap: 20px !important;
     border-radius: 24px;
     border: 1px solid var(--Neutral-Color-200, #DDD);
     background: var(--Neutral-Color-50, #FFF);
     box-shadow: 0 20px 24px -12px rgba(166, 166, 166, 0.08), 0 8px 8px -12px rgba(166, 166, 166, 0.03);
-    min-height: 0;
     position: relative;
     overflow: hidden;
-    isolation: isolate;
     flex-shrink: 0;
-    height: 100%;
 }
 
 .tech-card>h3,
