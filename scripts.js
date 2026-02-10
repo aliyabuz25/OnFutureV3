@@ -45,25 +45,8 @@ function initBarba() {
   barba.init({
     sync: true,
     transitions: [{
-      async leave(data) {
-        const done = this.async();
-        await gsap.to(data.current.container, {
-          opacity: 0,
-          x: -100, // Slide left
-          duration: 0.4,
-          ease: "power2.inOut"
-        });
-        done();
-      },
       async enter(data) {
-        gsap.from(data.next.container, {
-          opacity: 0,
-          x: 100, // Enter from right
-          duration: 0.4,
-          ease: "power2.out",
-          clearProps: "all"
-        });
-        initApp(data.next.container); // Re-initialize app scoped to new container
+        initApp(data.next.container);
       },
       async once(data) {
         initApp(data.next.container);
@@ -750,20 +733,30 @@ function initPage(scope = document) {
   };
 
   const setupFaq = () => {
-    if (!faqItems.length) return;
+    const items = scope.querySelectorAll(".faq-item");
+    if (!items.length) return;
 
-    faqItems.forEach((item) => {
+    items.forEach((item) => {
       const question = item.querySelector(".faq-question");
       const answer = item.querySelector(".faq-answer");
       const icon = question?.querySelector(".faq-icon");
       if (!question || !answer) return;
-      // Reset to closed state on load
+
+      // Ensure fresh state
       item.classList.remove("open");
       question.setAttribute("aria-expanded", "false");
       if (icon) icon.textContent = "+";
-      question.addEventListener("click", () => {
+
+      // Remove existing listener to avoid duplicates if any
+      const newQuestion = question.cloneNode(true);
+      question.parentNode.replaceChild(newQuestion, question);
+
+      newQuestion.addEventListener("click", (e) => {
+        e.preventDefault();
+        e.stopPropagation();
+
         // Close all other items
-        faqItems.forEach((otherItem) => {
+        items.forEach((otherItem) => {
           if (otherItem !== item && otherItem.classList.contains("open")) {
             otherItem.classList.remove("open");
             const otherQuestion = otherItem.querySelector(".faq-question");
@@ -774,8 +767,12 @@ function initPage(scope = document) {
         });
 
         const isOpen = item.classList.toggle("open");
-        question.setAttribute("aria-expanded", isOpen ? "true" : "false");
-        if (icon) icon.textContent = isOpen ? "-" : "+";
+        newQuestion.setAttribute("aria-expanded", isOpen ? "true" : "false");
+        if (icon) {
+          // Re-query icon in newQuestion
+          const newIcon = newQuestion.querySelector(".faq-icon");
+          if (newIcon) newIcon.textContent = isOpen ? "−" : "+";
+        }
       });
     });
   };
