@@ -68,8 +68,10 @@ app.use(helmet({
 app.use(morgan('combined'));
 app.use(express.json());
 
-// 1. Serve static files FIRST
-app.use(express.static(ROOT));
+// 1. Serve static files FIRST with support for extension-less .html files
+app.use(express.static(ROOT, {
+  extensions: ['html']
+}));
 
 // 2. API Endpoints
 app.get('/api/content', (req, res) => {

@@ -2,28 +2,28 @@
     "brand": {
         "logo": "/logo/onfuture-logo.png",
         "alt": "Logo",
-        "link": "/index.html"
+        "link": "/"
     },
     "links": [
         {
             "text": "Ana səhifə",
-            "link": "/index.html",
+            "link": "/",
             "active": true,
             "i18nKey": "nav.home"
         },
         {
             "text": "Xaricdə Təhsil",
-            "link": "/pages/Təhsil.html",
+            "link": "/pages/Təhsil",
             "i18nKey": "nav.education"
         },
         {
             "text": "Akademiya",
-            "link": "/pages/Akademiya.html",
+            "link": "/pages/Akademiya",
             "i18nKey": "nav.academy"
         },
         {
             "text": "Əlaqə",
-            "link": "/pages/Eleqa.html",
+            "link": "/pages/Eleqa",
             "i18nKey": "nav.contact"
         }
     ],

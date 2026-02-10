@@ -187,8 +187,7 @@ function initPage(scope = document) {
   // -- Universal AI Management Blueprint: Content Binding --
   const bindDynamicContent = async () => {
     try {
-      // Use a timestamp to break cache and ensure content3.json is loaded fresh
-      const res = await fetch(getAssetPath(`/data/content3.json?v=${new Date().getTime()}`));
+      const res = await fetch(getAssetPath('/data/content3.json'));
       if (!res.ok) return;
       const content = await res.json();
 
@@ -967,11 +966,11 @@ function setActiveNavByPath(navLinks, scope = document) {
   mobileLinks.forEach(link => link.classList.remove('active'));
 
   let targetIndex = 0;
-  if (path.includes("/pages/Təhsil.html")) {
+  if (path.includes("/pages/Təhsil")) {
     targetIndex = 1;
-  } else if (path.includes("/pages/Akademiya.html")) {
+  } else if (path.includes("/pages/Akademiya")) {
     targetIndex = 2;
-  } else if (path.includes("/pages/Eleqa.html")) {
+  } else if (path.includes("/pages/Eleqa")) {
     targetIndex = 3;
   }
 
