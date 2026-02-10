@@ -26,7 +26,7 @@ if (fs.existsSync(defaultsDir)) {
   });
 }
 
-const contentPath = path.join(dataDir, 'content.json');
+const contentPath = path.join(dataDir, 'content2.json');
 const navbarPath = path.join(dataDir, 'navbar.json');
 
 // Ensure files are at least valid empty objects to prevent 404/crash

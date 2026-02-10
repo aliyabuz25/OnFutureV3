@@ -187,7 +187,7 @@ function initPage(scope = document) {
   // -- Universal AI Management Blueprint: Content Binding --
   const bindDynamicContent = async () => {
     try {
-      const res = await fetch(getAssetPath('/data/content.json'));
+      const res = await fetch(getAssetPath('/data/content2.json'));
       if (!res.ok) return;
       const content = await res.json();
 
