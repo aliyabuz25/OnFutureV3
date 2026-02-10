@@ -223,6 +223,7 @@ function initPage(scope = document) {
       });
 
       console.log(`Universal Management: ${Object.keys(content).length} keys synced.`);
+      setupStudyTabs(); // Re-initialize tabs after dynamic content is loaded
     } catch (e) {
       console.warn('Universal Management: Failed to sync content', e);
     }
@@ -281,7 +282,7 @@ function initPage(scope = document) {
     if (keys.length === 0) return;
 
     container.innerHTML = keys.map(idx => `
-      <article class="study-card">
+      <article class="study-card" data-degree="${cards[idx].degree || 'bachelor'}">
         <div class="study-card-figure" style="--study-card-image: url('${cards[idx].image || 'https://placehold.co/379x177'}');"></div>
         <div class="study-card-body">
           <div class="study-card-title">${cards[idx].title || ''}</div>
@@ -690,25 +691,32 @@ function initPage(scope = document) {
   };
 
   const setupStudyTabs = () => {
-    if (!studyTabs.length || !studyCards.length) return;
+    const tabs = scope.querySelectorAll(".study-tab");
+    const cards = scope.querySelectorAll(".study-card");
+
+    if (!tabs.length || !cards.length) return;
 
     const activateDegree = (degree) => {
-      studyTabs.forEach((tab) => {
+      tabs.forEach((tab) => {
         tab.classList.toggle("active", tab.dataset.degree === degree);
       });
-      studyCards.forEach((card) => {
+      cards.forEach((card) => {
         const match = card.dataset.degree === degree;
         card.classList.toggle("hidden", !match);
       });
     };
 
-    studyTabs.forEach((tab) => {
-      tab.addEventListener("click", () => {
-        activateDegree(tab.dataset.degree || "");
+    tabs.forEach((tab) => {
+      // Remove existing listener if any to avoid duplicates
+      const newTab = tab.cloneNode(true);
+      tab.parentNode.replaceChild(newTab, tab);
+
+      newTab.addEventListener("click", () => {
+        activateDegree(newTab.dataset.degree || "");
       });
     });
 
-    const initial = document.querySelector(".study-tab.active")?.dataset.degree || studyTabs[0]?.dataset.degree;
+    const initial = scope.querySelector(".study-tab.active")?.dataset.degree || tabs[0]?.dataset.degree;
     if (initial) activateDegree(initial);
   };
 
