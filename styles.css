@@ -575,9 +575,8 @@ body>div[id$="-container"]:not(#hero-container) {
     .hero-nav .navbar-collapse {
         display: flex !important;
         flex: 1 !important;
-        justify-content: space-between !important;
+        justify-content: flex-start !important;
         align-items: center !important;
-        /* This pushes Menu and Actions to the edges of the available space */
     }
 
     .hero-nav .navbar-nav {
@@ -633,8 +632,8 @@ body>div[id$="-container"]:not(#hero-container) {
         align-items: center !important;
         gap: 12px !important;
         /* 12px internal gap for better visual balance */
-        margin-left: 0 !important;
-        /* Handled by navbar-collapse space-between */
+        margin-left: 87px !important;
+        /* Fixed 87px gap from menu as requested */
         flex-shrink: 0 !important;
     }
 

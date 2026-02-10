@@ -536,13 +536,13 @@ body>div[id$="-container"]:not(#hero-container) {
 .hero-nav .navbar-collapse {
     display: flex;
     align-items: center;
-    justify-content: space-between;
+    justify-content: flex-start;
     gap: 0;
     flex: 1;
 }
 
 .hero-nav-actions {
-    margin-left: 0;
+    margin-left: 87px;
     display: flex;
     align-items: center;
     gap: 12px;
