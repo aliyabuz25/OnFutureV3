@@ -1,12 +1,8 @@
 // Helper to handle relative paths for both root and subpages
 function getAssetPath(path) {
-  if (!path.startsWith('/')) return path;
-
-  // Check if we are in /pages/ or another subdirectory
-  const isSubPage = window.location.pathname.includes('/pages/');
-  const cleanPath = path.substring(1);
-
-  return isSubPage ? `../${cleanPath}` : cleanPath;
+  // We use domain-root absolute paths (starting with /) which browser resolves correctly
+  // for both root and /pages/ subpages on onfuture.az
+  return path;
 }
 
 const SECTION_TARGETS = [
