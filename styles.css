@@ -576,8 +576,9 @@ body>div[id$="-container"]:not(#hero-container) {
     .hero-nav .navbar-collapse {
         display: flex !important;
         flex: 1 !important;
-        justify-content: flex-start !important;
+        justify-content: space-between !important;
         align-items: center !important;
+        /* This pushes Menu and Actions to the edges of the available space */
     }
 
     .hero-nav .navbar-nav {
@@ -589,6 +590,7 @@ body>div[id$="-container"]:not(#hero-container) {
         /* Fixed width as requested */
         margin: 0 !important;
         padding: 0 !important;
+        justify-content: space-between !important;
     }
 
     /* Removed first/last child padding overrides to maintain consistent 12px boxes */
@@ -632,7 +634,8 @@ body>div[id$="-container"]:not(#hero-container) {
         align-items: center !important;
         gap: 12px !important;
         /* 12px internal gap for better visual balance */
-        margin-left: 87px !important;
+        margin-left: 0 !important;
+        /* Handled by navbar-collapse space-between */
         flex-shrink: 0 !important;
     }
 
