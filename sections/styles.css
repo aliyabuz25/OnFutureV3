@@ -553,7 +553,7 @@ body>div[id$="-container"]:not(#hero-container) {
     align-items: center;
     justify-content: flex-start;
     gap: 24px;
-    width: auto;
+    width: 717px;
     height: 48px;
     flex-shrink: 0;
 }
