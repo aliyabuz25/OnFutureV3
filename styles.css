@@ -584,19 +584,13 @@ body>div[id$="-container"]:not(#hero-container) {
         display: flex !important;
         flex-direction: row !important;
         align-items: center !important;
-        gap: 48px !important;
-        /* Airy gap between links */
+        gap: 32px !important;
+        /* Balanced gap to accommodate internal padding */
         margin: 0 !important;
         padding: 0 !important;
     }
 
-    .hero-nav .navbar-nav .nav-item:first-child .nav-link {
-        padding-left: 0 !important;
-    }
-
-    .hero-nav .navbar-nav .nav-item:last-child .nav-link {
-        padding-right: 0 !important;
-    }
+    /* Removed first/last child padding overrides to maintain consistent 12px boxes */
 
 
     .hero-nav .nav-item {
@@ -605,8 +599,8 @@ body>div[id$="-container"]:not(#hero-container) {
 
     .hero-nav .nav-link {
         color: rgba(255, 255, 255, 0.85) !important;
-        padding: 10px 0 !important;
-        /* Zero side padding to keep 87px gap accurate */
+        padding: 12px !important;
+        /* 12px padding on all sides as requested */
         text-align: center !important;
         white-space: nowrap !important;
         font-family: var(--Font-Family-Headline, "DM Sans") !important;
