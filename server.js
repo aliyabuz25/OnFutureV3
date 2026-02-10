@@ -26,17 +26,17 @@ if (fs.existsSync(defaultsDir)) {
   });
 }
 
-const contentPath = path.join(dataDir, 'content3.json');
+const contentPath = path.join(dataDir, 'content4.json');
 const navbarPath = path.join(dataDir, 'navbar.json');
 
 // --- Migration Logic ---
-const oldContentPath = path.join(dataDir, 'content.json');
+const oldContentPath = path.join(dataDir, 'content3.json');
 if (fs.existsSync(oldContentPath) && !fs.existsSync(contentPath)) {
   try {
     fs.renameSync(oldContentPath, contentPath);
-    console.log(`[Migration] Renamed content.json to content3.json`);
+    console.log(`[Migration] Renamed content3.json to content4.json`);
   } catch (err) {
-    console.error(`[Migration] Failed to rename content.json:`, err);
+    console.error(`[Migration] Failed to rename content3.json:`, err);
   }
 }
 
