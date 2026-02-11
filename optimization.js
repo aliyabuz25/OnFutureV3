@@ -106,9 +106,6 @@
   }
 
   document.addEventListener('DOMContentLoaded', () => {
-    octoLog("dom-loaded");
-    applyScale();
-    applyServicesGridFit();
-    applyDynamicPadding();
+
   }, { once: true });
 })();
