@@ -60,7 +60,7 @@ async function loadSections(scope = document) {
     const container = scope.querySelector(`#${id}`);
     if (!container) return;
     try {
-      const response = await fetch(getAssetPath(path));
+      const response = await fetch(getAssetPath(`${path}?v=${Date.now()}`));
       if (!response.ok) return;
       container.innerHTML = await response.text();
     } catch (e) {
@@ -74,7 +74,7 @@ async function loadNavbar(scope = document) {
   const container = scope.querySelector("#navbar-container");
   if (!container) return;
   try {
-    const response = await fetch(getAssetPath("/data/navbar.json"));
+    const response = await fetch(getAssetPath(`/data/navbar.json?v=${Date.now()}`));
     if (!response.ok) throw new Error("Failed to load navbar.json");
     const data = await response.json();
 
