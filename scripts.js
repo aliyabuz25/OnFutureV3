@@ -192,10 +192,7 @@ function initPage(scope = document) {
       const content = await res.json();
 
       // 1. Dynamic Section Rendering (Full CMS control)
-      const linksRes = await fetch(getAssetPath(`/data/links.json?v=${Date.now()}`));
-      const links = linksRes.ok ? await linksRes.json() : {};
-
-      renderDynamicServices(content, links);
+      renderDynamicServices(content);
       renderDynamicStudy(content);
       // You can add more like renderDynamicFaq(content), etc.
 
@@ -232,7 +229,7 @@ function initPage(scope = document) {
     }
   };
 
-  function renderDynamicServices(content, links = {}) {
+  function renderDynamicServices(content) {
     const container = scope.querySelector('.services-grid-inner');
     if (!container) return;
 
@@ -252,25 +249,18 @@ function initPage(scope = document) {
     const keys = Object.keys(services).sort((a, b) => a - b);
     if (keys.length === 0) return;
 
-    container.innerHTML = keys.map(idx => {
-      const cardKey = `card${idx}`;
-      const href = (links.services && links.services[cardKey]) || services[idx].link || '#';
-
-      return `
-      <article class="service-card" 
-               onclick="window.location.href='${href}'" 
-               style="cursor: pointer;">
+    container.innerHTML = keys.map(idx => `
+      <article class="service-card" data-service-id="card${idx}">
           <h3>
               <span class="service-num">${idx.padStart(2, '0')}.</span>
               <span>${services[idx].title || ''}</span>
           </h3>
           <p>${services[idx].desc || ''}</p>
-          <div class="service-card-icon" style="cursor: pointer;">
+          <div class="service-card-icon">
             <img src="${services[idx].icon || '/services/Arrow up-right.png'}" alt="">
           </div>
       </article>
-    `;
-    }).join('');
+    `).join('');
   }
 
   function renderDynamicStudy(content) {
@@ -852,9 +842,17 @@ function initPage(scope = document) {
     update();
   };
 
-  const setupApplicationRedirects = () => {
+  const setupApplicationRedirects = async () => {
+    let links = {};
+    try {
+      const res = await fetch(getAssetPath(`/data/links.json?v=${Date.now()}`));
+      if (res.ok) links = await res.json();
+    } catch (e) {
+      console.warn("Failed to load links.json", e);
+    }
+
     const redirectToContact = () => {
-      window.location.href = "/pages/Eleqa.html";
+      window.location.href = links.contact || "/pages/Eleqa.html";
     };
 
     // Hero CTA
@@ -876,11 +874,30 @@ function initPage(scope = document) {
     });
 
     // Visa Cards
-    scope.querySelectorAll(".visa-support-card").forEach(card => {
-      card.addEventListener("click", redirectToContact);
-      card.style.cursor = "pointer";
+    scope.addEventListener("click", (e) => {
+      if (e.target.closest(".visa-support-card")) {
+        redirectToContact();
+      }
     });
 
+    // Service Cards (Centralized handling from links.json)
+    scope.addEventListener("click", (e) => {
+      const card = e.target.closest(".service-card");
+      if (card) {
+        const serviceId = card.dataset.serviceId;
+        if (serviceId && links.services && links.services[serviceId]) {
+          window.location.href = links.services[serviceId];
+        } else {
+          // Fallback or default
+          redirectToContact();
+        }
+      }
+    });
+
+    // Cursor Styling for Service Cards
+    scope.querySelectorAll(".service-card").forEach(card => {
+      card.style.cursor = "pointer";
+    });
 
     // Scholarship Banner CTA
     scope.addEventListener("click", (e) => {

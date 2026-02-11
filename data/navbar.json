@@ -52,7 +52,7 @@
         },
         "cta": {
             "text": "Müraciət et",
-            "link": "#",
+            "link": "/pages/Eleqa.html",
             "i18nKey": "nav.cta"
         }
     }
