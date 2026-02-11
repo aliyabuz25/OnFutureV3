@@ -1608,8 +1608,8 @@ body>div[id$="-container"]:not(#hero-container) {
     padding: 20px !important;
     flex-direction: column;
     align-items: flex-start;
-    gap: 0 !important;
-    /* Removed gap for manual control */
+    gap: 20px !important;
+    /* 20px gap between elements as implied by diagram */
     border-radius: 24px;
     border: 1px solid var(--Neutral-Color-200, #DDD);
     background: var(--Neutral-Color-50, #FFF);
@@ -1628,7 +1628,6 @@ body>div[id$="-container"]:not(#hero-container) {
 
 .tech-card>.tech-chip {
     width: fit-content;
-    margin-bottom: 12px;
 }
 
 .tech-chip {
@@ -1654,7 +1653,6 @@ body>div[id$="-container"]:not(#hero-container) {
 
 .tech-card h3 {
     margin: 0;
-    margin-bottom: 16px;
     color: var(--Neutral-Color-1000, #0A0A0A);
     font-family: var(--Font-Family-Headline, "DM Sans");
     font-size: var(--Font-Size-24, 24px);
@@ -1664,7 +1662,6 @@ body>div[id$="-container"]:not(#hero-container) {
     align-self: stretch;
     display: -webkit-box;
     -webkit-line-clamp: 2;
-    line-clamp: 2;
     -webkit-box-orient: vertical;
     overflow: hidden;
     text-overflow: ellipsis;
@@ -1673,9 +1670,8 @@ body>div[id$="-container"]:not(#hero-container) {
 }
 
 .tech-media {
-    width: 371px;
-    height: 218px;
-    box-sizing: border-box;
+    width: 100%;
+    height: 180px;
     border-radius: 18px;
     overflow: hidden;
     position: relative;
@@ -1685,7 +1681,6 @@ body>div[id$="-container"]:not(#hero-container) {
     display: flex;
     align-items: center;
     justify-content: center;
-    margin-bottom: 16px;
 }
 
 .tech-media img {
@@ -1788,8 +1783,6 @@ body>div[id$="-container"]:not(#hero-container) {
 
 .tech-desc {
     margin: 0;
-    margin-top: auto;
-    margin-bottom: 16px;
     color: var(--Neutral-Color-500, #737373);
     font-family: var(--Font-Family-Body, Poppins);
     font-size: var(--Font-Size-16, 16px);
@@ -1798,7 +1791,6 @@ body>div[id$="-container"]:not(#hero-container) {
     line-height: var(--Line-Height-24, 24px);
     align-self: stretch;
     padding: 0;
-    text-align: left;
 }
 
 .tech-footer {
@@ -1809,6 +1801,7 @@ body>div[id$="-container"]:not(#hero-container) {
     padding-top: 16px;
     gap: 8px;
     border-top: 1px solid var(--Neutral-Color-300, #C8C8C8);
+    margin-top: auto;
 }
 
 .tech-lessons {
@@ -1821,12 +1814,12 @@ body>div[id$="-container"]:not(#hero-container) {
 }
 
 .tech-lessons span {
-    color: #262626;
-    font-family: 'Poppins', sans-serif;
-    font-size: 16px;
+    color: var(--Neutral-Color-800, #262626);
+    font-family: var(--Font-Family-Body, Poppins);
+    font-size: var(--Font-Size-16, 16px);
     font-style: normal;
     font-weight: 400;
-    line-height: 24px;
+    line-height: var(--Line-Height-24, 24px);
     flex: 1 0 0;
 }
 
@@ -2373,6 +2366,7 @@ body>div[id$="-container"]:not(#hero-container) {
     .services-section,
     .services-grid,
     .results-section,
+    .study-section,
     .visa-section,
     .tech-courses,
     .faq-section {
@@ -2503,6 +2497,7 @@ body>div[id$="-container"]:not(#hero-container) {
 
     .results-section,
     .services-section,
+    .study-section,
     .visa-section,
     .tech-courses,
     .faq-section {
@@ -3022,6 +3017,7 @@ body>div[id$="-container"]:not(#hero-container) {
     .results-section,
     .services-section,
     .services-grid,
+    .study-section,
     .visa-section,
     .tech-courses,
     .faq-section {
@@ -3305,17 +3301,4 @@ body>div[id$="-container"]:not(#hero-container) {
     .desktop-menu {
         display: none !important;
     }
-}
-
-/* --- Unified Section Titles --- */
-.services-title,
-.study-title,
-.visa-title,
-.tech-title,
-.testimonials__title {
-    font-family: var(--Font-Family-Headline, "DM Sans") !important;
-    font-size: 48px !important;
-    font-weight: 500 !important;
-    line-height: normal !important;
-    color: var(--Neutral-Color-1100, #000);
 }

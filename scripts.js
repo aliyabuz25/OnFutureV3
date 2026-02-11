@@ -14,7 +14,7 @@ const SECTION_TARGETS = [
   { id: "services-container", path: "/sections/services.html" },
   { id: "study-container", path: "/sections/study.html" },
   { id: "visas-container", path: "/sections/visas.html" },
-  { id: "tech-container", path: "/sections/academy-tech.html" },
+  { id: "tech-container", path: "/sections/tech.html" },
   { id: "scholarship-banner-container", path: "/sections/scholarship-banner.html" },
   { id: "testimonials-container", path: "/sections/testimonials.html" },
   { id: "academy-tech-container", path: "/sections/academy-tech.html" },
@@ -401,59 +401,7 @@ function initPage(scope = document) {
     return card;
   };
 
-  if (techProgramsGrid && techProgramsGrid.querySelectorAll(".tech-card").length === 0) {
-    const programs = [
-      {
-        badge: "DevOps",
-        badgeKey: "tech.card1.chip",
-        title: "DevOps Mühəndisliyi Kursu – CI/CD və Cloud əsasları",
-        titleKey: "tech.card1.title",
-        img: "/tedris/devops.svg",
-        desc: "Layihələrdə etibarlı yerləşdirmə üçün pipeline-lar, avtomatlaşdırma və bulud əsaslarını öyrənin.",
-        descKey: "tech.card1.desc",
-        lessons: "12 dərs",
-      },
-      {
-        badge: "UI/UX Design",
-        badgeKey: "tech.card2.chip",
-        title: "UX/UI Dizayn Kursu – İstifadəçi təcrübəsi və interfeys dizaynı",
-        titleKey: "tech.card2.title",
-        img: "/tedris/uxui.svg",
-        desc: "Araşdırma, wireframe, prototipləmə və təhvil prosesini öyrənin.",
-        descKey: "tech.card2.desc",
-        lessons: "12 dərs",
-      },
-      {
-        badge: "Q/A Assurance",
-        badgeKey: "tech.card3.chip",
-        title: "QA Təlimi – Manual və avtomatlaşdırılmış testlər",
-        titleKey: "tech.card3.title",
-        img: "/tedris/qa.svg",
-        desc: "Manual, avtomatlaşdırılmış və CI inteqrasiyalı test intizamı qurun.",
-        descKey: "tech.card3.desc",
-        lessons: "12 dərs",
-      },
-    ];
-    const fragment = document.createDocumentFragment();
-    programs.forEach((program) => {
-      fragment.append(
-        addProgram(
-          program.badge,
-          program.title,
-          program.img,
-          program.desc,
-          program.lessons,
-          {
-            badgeKey: program.badgeKey,
-            titleKey: program.titleKey,
-            descKey: program.descKey,
-          }
 
-        )
-      );
-    });
-    techProgramsGrid.insertBefore(fragment, techProgramsGrid.firstChild);
-  }
 
   const originalTexts = {};
 
@@ -1031,4 +979,3 @@ function setupMobileMenu(scope = document) {
     });
   }
 }
-

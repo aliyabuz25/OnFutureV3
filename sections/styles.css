@@ -1465,29 +1465,26 @@ body>div[id$="-container"]:not(#hero-container) {
 
 .tech-card {
     display: flex;
+    flex-direction: column;
     width: 411px !important;
     height: 522px !important;
     padding: 20px !important;
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 20px !important;
+    gap: 16px !important;
     border-radius: 24px;
     border: 1px solid var(--Neutral-Color-200, #DDD);
     background: var(--Neutral-Color-50, #FFF);
-    box-shadow: 0 20px 24px -12px rgba(166, 166, 166, 0.08), 0 8px 8px -12px rgba(166, 166, 166, 0.03);
+    box-shadow: 0 20px 24px -12px rgba(166, 166, 166, 0.08);
+    box-sizing: border-box;
     position: relative;
     overflow: hidden;
     flex-shrink: 0;
 }
 
-.tech-card>h3,
-.tech-card>.tech-media,
-.tech-card>.tech-desc,
-.tech-card>.tech-footer {
+.tech-card>* {
     width: 100%;
 }
 
-.tech-card>.tech-chip {
+.tech-card .tech-chip {
     width: fit-content;
 }
 
@@ -1500,7 +1497,6 @@ body>div[id$="-container"]:not(#hero-container) {
     font-size: 14px;
     font-family: "Poppins", sans-serif;
     white-space: nowrap;
-    width: fit-content;
 }
 
 .tech-chip.mint {
@@ -1525,7 +1521,6 @@ body>div[id$="-container"]:not(#hero-container) {
 }
 
 .tech-media {
-    width: 100%;
     height: 180px;
     border-radius: 18px;
     overflow: hidden;
@@ -1536,6 +1531,7 @@ body>div[id$="-container"]:not(#hero-container) {
     display: flex;
     align-items: center;
     justify-content: center;
+    margin-top: auto !important;
 }
 
 .tech-media img {
@@ -1549,23 +1545,26 @@ body>div[id$="-container"]:not(#hero-container) {
 
 .tech-desc {
     margin: 0;
+    margin-top: auto;
     color: var(--Neutral-Color-500, #737373);
     font-family: var(--Font-Family-Body, Poppins);
     font-size: var(--Font-Size-16, 16px);
     font-style: normal;
     font-weight: 400;
     line-height: var(--Line-Height-24, 24px);
+    align-self: stretch;
     padding: 0;
+    text-align: justify;
+    text-justify: inter-word;
 }
 
 .tech-footer {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    width: 100%;
-    padding-top: 16px;
+    padding-top: 12px;
     border-top: 1px solid var(--Neutral-Color-300, #C8C8C8);
-    margin-top: auto;
+    margin-top: 0;
 }
 
 .tech-lessons {
@@ -1584,7 +1583,6 @@ body>div[id$="-container"]:not(#hero-container) {
     font-style: normal;
     font-weight: 400;
     line-height: var(--Line-Height-24, 24px);
-    flex: 1 0 0;
 }
 
 .tech-lessons svg {

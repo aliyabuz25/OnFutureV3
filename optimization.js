@@ -73,7 +73,6 @@
   const padSelectors = [
     '.services-grid',
     '.visa-section',
-    '.scholarship',
     '.footer-inner',
     '.hero-content',
   ].join(', ');
