@@ -12,6 +12,15 @@
     */
     #hero .hero-heading {
         width: 964px !important;
+        opacity: 0;
+        /* Hide initially to prevent flicker */
+        transition: opacity 0.3s ease-in;
+    }
+
+    #hero .hero-subtitle {
+        opacity: 0;
+        /* Hide initially */
+        transition: opacity 0.3s ease-in;
     }
 </style>
 <div style="height: 540px !important;" id="hero" class="hero">
@@ -88,9 +97,7 @@
             </div>
         </div>
     </nav>
-    <script>
-        alert("hello");
-    </script>
+
     <div class="hero-content">
         <h1 class="hero-heading" data-i18n-key="education.hero.heading">
         </h1>

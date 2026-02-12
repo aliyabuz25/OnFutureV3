@@ -199,6 +199,10 @@ function initPage(scope = document) {
         // Handle Text
         else {
           el.innerHTML = value;
+          // Fade in text after content is set to prevent flicker
+          if (el.classList.contains('hero-heading') || el.classList.contains('hero-subtitle')) {
+            el.style.opacity = '1';
+          }
         }
       });
 
