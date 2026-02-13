@@ -1194,13 +1194,16 @@ body>div[id$="-container"]:not(#hero-container) {
     margin-bottom: 8px;
 }
 
-.study-card-desc-strong {
-    color: var(--Neutral-Color-1100, #000);
+.study-card-desc-strong,
+.study-card-desc-sep {
+    color: var(--Neutral-Color-1100, #0A0A0A);
     font-weight: 500;
 }
 
-.study-card-desc-sep,
-.study-card-desc-detail,
+.study-card-desc-detail {
+    color: #737373;
+}
+
 .study-card-desc {
     color: var(--Neutral-Color-600, #525252);
     font-family: var(--Font-Family-Body, Poppins);
@@ -3138,6 +3141,9 @@ body>div[id$="-container"]:not(#hero-container) {
         padding-left: 0 !important;
         display: flex;
         align-items: center;
+        font-size: 14px !important;
+        line-height: 20px !important;
+        color: #0A0A0A !important;
     }
 
     .study-card-meta span::before {
