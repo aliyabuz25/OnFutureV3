@@ -1400,6 +1400,17 @@ body>div[id$="-container"]:not(#hero-container) {
     transform: translateY(-50%);
 }
 
+/* Global Section Padding */
+.results-section,
+.services-section,
+.visa-section,
+.tech-courses,
+.faq-section,
+.study-section,
+.scholarship-section {
+    padding: 60px 0;
+}
+
 .visa-row {
     display: grid;
     grid-template-columns: repeat(2, 640px);
@@ -2463,14 +2474,21 @@ body>div[id$="-container"]:not(#hero-container) {
 
 .service-card p {
     margin: 0;
-    margin-top: auto;
-    padding: 0;
-    color: var(--Neutral-Color-1100, #000);
+    padding: 10px;
+    color: #000000;
     font-family: var(--Font-Family-Body, Poppins);
     font-size: var(--Font-Size-16, 16px);
     font-style: normal;
-    font-weight: 400 !important;
+    font-weight: 400;
     line-height: var(--Line-Height-24, 24px);
+    padding-bottom: 12px;
+    margin-bottom: 12px;
+    width: fill 234px !important;
+    height: fill 96px !important;
+    padding: 10px !important;
+    gap: 10px !important;
+    padding-right: 10px !important;
+    padding-left: 10px !important;
 }
 
 .service-card-icon {
@@ -2544,13 +2562,7 @@ body>div[id$="-container"]:not(#hero-container) {
         padding: 44px 40px;
     }
 
-    .results-section,
-    .services-section,
-    .visa-section,
-    .tech-courses,
-    .faq-section {
-        padding: 44px 0;
-    }
+
 
     .study-cards,
     .tech-grid,
